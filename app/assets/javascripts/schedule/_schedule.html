@@ -1,1 +1,16 @@
 <h2>This is the schedule view</h2>
+<div class="row h2">
+  <div class="col-md-3 text-left">
+    <a role="button" ng-click="prevDay()">
+      <span class="fa fa-chevron-left"></span>
+    </a> 
+  </div>
+  <div class="col-md-6 text-center">
+    {{day.moment | amDateFormat:'dddd'}} {{day.moment | amDateFormat:'ll'}}
+  </div>
+  <div class="col-md-3 text-right">
+    <a role="button" ng-click="nextDay()">
+      <span class="fa fa-chevron-right"></span>
+    </a> 
+  </div>
+</div>

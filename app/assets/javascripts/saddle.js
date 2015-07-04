@@ -1,4 +1,4 @@
-angular.module("saddle", ["ui.router", "templates"])
+angular.module("saddle", ["ui.router", "templates", "angularMoment"])
 .config([
 '$stateProvider',
 '$urlRouterProvider',
