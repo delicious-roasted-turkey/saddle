@@ -1,16 +1,43 @@
-<h2>This is the schedule view</h2>
+<p class="text-muted">(This is the schedule view)</p>
 <div class="row h2">
-  <div class="col-md-3 text-left">
+
+  <div class="col-xs-2 text-left">
     <a role="button" ng-click="prevDay()">
       <span class="fa fa-chevron-left"></span>
     </a> 
   </div>
-  <div class="col-md-6 text-center">
-    {{day.moment | amDateFormat:'dddd'}} {{day.moment | amDateFormat:'ll'}}
+  <div class="col-xs-8 text-center">
+    {{day.localDate.moment | amDateFormat:'dddd'}} {{day.localDate.moment | amDateFormat:'ll'}}
   </div>
-  <div class="col-md-3 text-right">
+  <div class="col-xs-2 text-right">
     <a role="button" ng-click="nextDay()">
       <span class="fa fa-chevron-right"></span>
     </a> 
   </div>
 </div>
+
+<div class="row" ng-repeat-start="outing in day.outings">
+  <div class="outing col-xs-12">
+    <span class="h3">
+      {{outing.time.asStr}} {{outing.name}} {{reservedPlaces(outing)}} / {{numAvailableHorses}}
+    </span>
+  </div>
+</div>
+<div class="row" ng-repeat-start="reservation in outing.reservations">
+  <div class="col-xs-6 col-sm-3">{{reservation.numPersons}}</div>
+  <div class="col-xs-6 col-sm-3">
+    <span ng-repeat="customerSkillLevel in reservation.customerSkillLevels">
+      <span ng-show="reservation.customerSkillLevels.length > 1">
+        {{customerSkillLevel.numPersons}}
+      </span>
+      {{customerSkillLevel.skillLevel}}
+      <span ng-show="!$last"> /</span>
+    </span>
+  </div>
+  <div class="col-sm-3">{{reservation.name}}</div>
+  <div class="col-sm-3">{{reservation.phone}}</div>
+</div>
+<hr class="reservationSeparator" ng-repeat-end ng-show="!$last"/>
+<div class="row" ng-repeat-end></div>
+
+
