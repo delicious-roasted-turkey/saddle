@@ -2,6 +2,7 @@
 //= require angular-rails-templates
 //= require angular-ui-router
 //= require moment
+//= require moment/locale/ca.js
 //= require angular-moment
 // 
 //  (jQuery is required by bootsrap)

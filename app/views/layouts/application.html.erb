@@ -7,10 +7,12 @@
   <%= csrf_meta_tags %>
 </head>
 <body ng-app="saddle">
-
   <div class="col-md-8 col-md-offset-2">
-    <ui-view></ui-view>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <ui-view></ui-view>
+      </div>
+    </div>
   </div>
-
 </body>
 </html>

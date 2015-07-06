@@ -1,0 +1,52 @@
+<h3>Nova reserva</h3>
+
+<form class="form-horizontal">
+
+  <div class="form-group">
+    <div class="col-sm-10 col-sm-offset-2">
+      <p class="form-control-static">
+        {{day.localDate.moment | amDateFormat:'dddd'}} {{day.localDate.moment | amDateFormat:'ll'}} {{outing.time.asStr}}
+      </p>
+      <p class="form-control-static">
+        {{outing.name}}
+      </p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="add-reservation-numpersons" class="col-sm-2 control-label">Num. persones</label>
+    <div class="col-sm-10">
+      <input ng-model="reservation.numPersons" type="number" class="form-control" id="add-reservation-numpersons">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="add-reservation-name" class="col-sm-2 control-label">Nom contacte</label>
+    <div class="col-sm-10">
+      <input ng-model="reservation.name" type="text" class="form-control" id="add-reservation-name">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="add-reservation-phone" class="col-sm-2 control-label">Telèfon</label>
+    <div class="col-sm-10">
+      <input ng-model="reservation.phone" type="tel" class="form-control" id="add-reservation-phone">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Nivell</label>
+    <div class="col-sm-10">
+      <p class="form-control-static text-muted">(Aquí hi hauria manera d'indicar el nivell de les persones del grup.)</p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="add-reservation-comments" class="col-sm-2 control-label">Observacions</label>
+    <div class="col-sm-10">
+      <textarea ng-model="reservation.comments" type="tel" class="form-control" id="add-reservation-comments"></textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10 text-right">
+      <button type="button" ng-click="goToSchedule()" class="btn btn-default">Cancel·lar</button>
+      <button type="button" ng-click="submit()" class="btn btn-primary">Acceptar</button>
+    </div>
+  </div>
+</form>

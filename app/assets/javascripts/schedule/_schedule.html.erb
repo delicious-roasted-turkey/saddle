@@ -1,0 +1,65 @@
+<div class="row h2">
+
+  <div class="col-xs-2 text-left">
+    <a role="button" ng-click="prevDay()">
+      <span class="fa fa-chevron-left"></span>
+    </a> 
+  </div>
+  <div class="col-xs-8 text-center">
+    {{day.localDate.moment | amDateFormat:'dddd'}} {{day.localDate.moment | amDateFormat:'ll'}}
+  </div>
+  <div class="col-xs-2 text-right">
+    <a role="button" ng-click="nextDay()">
+      <span class="fa fa-chevron-right"></span>
+    </a> 
+  </div>
+</div>
+
+<div class="row" ng-repeat-start="outing in day.outings">
+  <div class="outing col-xs-9">
+    <span class="h3">
+      {{outing.time.asStr}} {{outing.name}}
+    </span>
+  </div>
+  <div class="outing col-xs-3 text-right">
+    <span class="h3">
+      {{reservedPlaces(outing)}} / {{numAvailableHorses}}
+    </span>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12 text-right">
+    <a role="button" ui-sref="addReservation({day:day, outing: outing})">
+        <span class="fa fa-plus"></span> Afegir reserva
+    </a>
+  </div>
+</div>
+<hr  ng-repeat-start="reservation in outing.reservations" class="reservationSeparator"/>
+<div class="row" ng-repeat-end>
+  <div class="col-xs-6 col-sm-2">{{reservation.numPersons}}</div>
+  <div class="col-xs-6 col-sm-3">
+    <span ng-repeat="customerSkillLevel in reservation.customerSkillLevels">
+      <span ng-show="reservation.customerSkillLevels.length > 1">
+        {{customerSkillLevel.numPersons}}
+      </span>
+      {{customerSkillLevel.skillLevel}}
+      <span ng-show="!$last"> /</span>
+    </span>
+  </div>
+  <div class="col-sm-3">{{reservation.name}}</div>
+  <div class="col-sm-3">
+    {{reservation.phone}}
+    <% if false %>
+    <a href="tel:{{reservation.phone}}"><span class="fa fa-phone"></span></a>
+    <a href="skype:{{reservation.phone}}"><span class="fa fa-skype"></span></a>
+    <% end %>
+  </div>
+  <div class="col-sm-1 text-right">
+    <a role="button" ui-sref="editReservation({day:day, outing: outing, reservation: reservation})">
+      <span class="fa fa-pencil"></span>
+    </a>
+  </div>
+</div>
+<div class="row" ng-repeat-end></div>
+
+

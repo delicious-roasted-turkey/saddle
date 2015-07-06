@@ -2,7 +2,8 @@ angular.module("saddle", ["ui.router", "templates", "angularMoment"])
 .config([
 '$stateProvider',
 '$urlRouterProvider',
-function($stateProvider, $urlRouterProvider){
+'$compileProvider',
+function($stateProvider, $urlRouterProvider, $compileProvider){
 
   // Define "schedule" state as the root state of
   // the app. This is likely to change in the future
@@ -11,8 +12,35 @@ function($stateProvider, $urlRouterProvider){
   .state('schedule', {
     url: '/schedule',
     templateUrl: 'schedule/_schedule.html',
-    controller: 'ScheduleCtrl'
+    controller: 'ScheduleCtrl',
+    params: {
+      day: null
+    }
+  })
+  .state('addReservation', {
+    url: '/add-reservation',
+    templateUrl: 'reservations/_reservationForm.html',
+    controller: 'AddReservationCtrl',
+    params: {
+      day: null,
+      outing: null
+    }
+  })
+  .state('editReservation', {
+    url: '/edit-reservation',
+    templateUrl: 'reservations/_reservationForm.html',
+    controller: 'EditReservationCtrl',
+    params: {
+      day: null,
+      outing: null,
+      reservation: null
+    }
   });
 
   $urlRouterProvider.otherwise('schedule');
+
+  // Whitelist URL protocols
+  $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|skype):/);
+
 }]);
+
