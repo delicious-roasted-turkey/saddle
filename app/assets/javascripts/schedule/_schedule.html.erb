@@ -15,13 +15,13 @@
   </div>
 </div>
 
-<div class="row" ng-repeat-start="outing in day.outings">
-  <div class="outing col-xs-9">
+<div class="row outing" ng-repeat-start="outing in day.outings">
+  <div class="col-sm-9">
     <span class="h3">
       {{outing.time.asStr}} {{outing.name}}
     </span>
   </div>
-  <div class="outing col-xs-3 text-right">
+  <div class="col-sm-3 text-right">
     <span class="h3">
       {{reservedPlaces(outing)}} / {{numAvailableHorses}}
     </span>
