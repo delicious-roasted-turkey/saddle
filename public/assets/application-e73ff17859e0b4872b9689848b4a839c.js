@@ -48007,7 +48007,7 @@ function($stateProvider, $urlRouterProvider, $compileProvider){
   $stateProvider
   .state('schedule', {
     url: '/schedule',
-    templateUrl: 'schedule/_schedule.html',
+    templateUrl: 'schedule/_schedule.html.erboo',
     controller: 'ScheduleCtrl',
     params: {
       day: null
