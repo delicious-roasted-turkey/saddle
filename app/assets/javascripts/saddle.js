@@ -35,6 +35,11 @@ function($stateProvider, $urlRouterProvider, $compileProvider){
       outing: null,
       reservation: null
     }
+  })
+
+  .state('defaultOutings', {
+    url: '/default-outings',
+    templateUrl: 'outings/_defaultOutings.html'
   });
 
   $urlRouterProvider.otherwise('schedule');

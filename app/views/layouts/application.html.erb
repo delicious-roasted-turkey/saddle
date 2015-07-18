@@ -6,13 +6,60 @@
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
-<body ng-app="saddle">
-  <div class="col-md-8 col-md-offset-2">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <ui-view></ui-view>
+<body ng-app="saddle"
+      ng-controller="RootCtrl"
+      class="<%=@must_render_navbar ? 'with-navbar' : ''%>"
+>
+
+
+  <%= if @must_render_navbar
+        render "layouts/navbar"
+      end
+  %>
+
+  <div class="container-fluid">
+
+    <div class="row row-offcanvas row-offcanvas-left">
+
+      <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
+
+        <ul class="nav nav-sidebar">
+          <li ng-repeat="link in navbarLinks" ui-sref-active="active">
+            <a href="#" ui-sref="{{link.state}}">{{link.text}}</a>
+          </li>
+        </ul>
+
+      </div>
+
+      <div class="col-sm-9 col-md-10 main">
+
+        <!--toggle sidebar button-->
+        <p class="visible-xs">
+          <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">
+            <i class="fa fa-chevron-left"></i>
+            <i class="fa fa-chevron-right"></i>
+          </button>
+        </p>
+
+        <div class="col-md-10 col-md-offset-1">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <ui-view></ui-view>
+            </div>
+          </div>
+        </div>
+
+
       </div>
     </div>
   </div>
+
+  <footer>
+    <p class="pull-right"></p>
+  </footer>
+
 </body>
+
+
+
 </html>
