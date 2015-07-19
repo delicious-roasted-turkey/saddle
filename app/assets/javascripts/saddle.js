@@ -39,7 +39,13 @@ function($stateProvider, $urlRouterProvider, $compileProvider){
 
   .state('defaultOutings', {
     url: '/default-outings',
-    templateUrl: 'outings/_defaultOutings.html'
+    templateUrl: 'outings/_defaultOutings.html',
+    controller: 'DefaultOutingsCtrl',
+    resolve: {
+      defaultOutings: ["defaultOutings", function (defaultOutingsSvc) {
+        return defaultOutingsSvc.getAll();
+      }]
+    }
   });
 
   $urlRouterProvider.otherwise('schedule');
