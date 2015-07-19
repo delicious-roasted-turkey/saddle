@@ -1,6 +1,7 @@
 //= require angular
 //= require angular-rails-templates
 //= require angular-ui-router
+//= require angular-mocks
 //= require moment
 //= require moment/locale/ca.js
 //= require angular-moment
