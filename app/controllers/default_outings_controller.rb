@@ -1,0 +1,2 @@
+class DefaultOutingsController < ApplicationController
+end
