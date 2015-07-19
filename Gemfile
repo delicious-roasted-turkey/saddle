@@ -45,5 +45,9 @@ group :development, :test do
   gem 'spring'
 
   gem 'rspec-rails', '~> 3.0'
+  gem 'rspec-activemodel-mocks'
 end
 
+group :test do
+  gem "accept_values_for"
+end

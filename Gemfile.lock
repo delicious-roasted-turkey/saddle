@@ -1,6 +1,9 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    accept_values_for (0.7.2)
+      activemodel (>= 3, < 5)
+      rspec (>= 2.0, < 4.0)
     actionmailer (4.2.1)
       actionpack (= 4.2.1)
       actionview (= 4.2.1)
@@ -104,6 +107,14 @@ GEM
     rake (10.4.2)
     rdoc (4.2.0)
       json (~> 1.4)
+    rspec (3.3.0)
+      rspec-core (~> 3.3.0)
+      rspec-expectations (~> 3.3.0)
+      rspec-mocks (~> 3.3.0)
+    rspec-activemodel-mocks (1.0.1)
+      activemodel (>= 3.0)
+      activesupport (>= 3.0)
+      rspec-mocks (>= 2.99, < 4.0)
     rspec-core (3.3.1)
       rspec-support (~> 3.3.0)
     rspec-expectations (3.3.0)
@@ -159,11 +170,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  accept_values_for
   angular-rails-templates
   debugger
   jbuilder (~> 2.0)
   pg
   rails (= 4.2.1)
+  rspec-activemodel-mocks
   rspec-rails (~> 3.0)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
