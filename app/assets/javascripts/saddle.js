@@ -1,4 +1,4 @@
-angular.module("saddle", ["ui.router", "templates", "angularMoment"])
+angular.module('saddle', ['ui.router', 'templates', 'ngResource', 'angularMoment'])
 .config([
 '$stateProvider',
 '$urlRouterProvider',
@@ -42,7 +42,8 @@ function($stateProvider, $urlRouterProvider, $compileProvider){
     templateUrl: 'outings/_defaultOutings.html',
     controller: 'DefaultOutingsCtrl',
     resolve: {
-      defaultOutings: ["defaultOutings", function (defaultOutingsSvc) {
+      defaultOutings: ["defaultOutingsSvc", function (defaultOutingsSvc) {
+        console.log("resolving")
         return defaultOutingsSvc.getAll();
       }]
     }
