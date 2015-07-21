@@ -3,6 +3,5 @@ angular.module("saddle")
 "$scope",
 "defaultOutings",
 function($scope, defaultOutings){
-  console.log(defaultOutings);
   $scope.defaultOutings = defaultOutings;
 }]);

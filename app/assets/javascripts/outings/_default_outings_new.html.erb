@@ -1,0 +1,13 @@
+
+<form class="form-horizontal">
+
+  <%= form_group 'defaultOuting.time', 'Hora', :text %>
+  <%= form_group 'defaultOuting.name', 'Nom', :text %>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10 text-right">
+      <button type="button" ui-sref="defaultOutings-list" class="btn btn-default">Cancel·lar</button>
+      <button type="button" ng-click="submit()" class="btn btn-primary">Acceptar</button>
+    </div>
+  </div>
+</form>

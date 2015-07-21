@@ -11,7 +11,7 @@ angular.module("saddle")
 
     var navbarLinks = [
       new NavbarLink("schedule", "Reserves"),
-      new NavbarLink("defaultOutings", "Excursions")
+      new NavbarLink("defaultOutings-list", "Excursions")
     ];
 
     $scope.navbarLinks = navbarLinks;

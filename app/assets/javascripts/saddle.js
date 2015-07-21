@@ -19,7 +19,7 @@ function($stateProvider, $urlRouterProvider, $compileProvider){
   })
   .state('addReservation', {
     url: '/add-reservation',
-    templateUrl: 'reservations/_reservationForm.html',
+    templateUrl: 'reservations/_reservation_form.html',
     controller: 'AddReservationCtrl',
     params: {
       day: null,
@@ -28,7 +28,7 @@ function($stateProvider, $urlRouterProvider, $compileProvider){
   })
   .state('editReservation', {
     url: '/edit-reservation',
-    templateUrl: 'reservations/_reservationForm.html',
+    templateUrl: 'reservations/_reservation_form.html',
     controller: 'EditReservationCtrl',
     params: {
       day: null,
@@ -39,14 +39,23 @@ function($stateProvider, $urlRouterProvider, $compileProvider){
 
   .state('defaultOutings', {
     url: '/default-outings',
-    templateUrl: 'outings/_defaultOutings.html',
+    templateUrl: 'outings/_default_outings.html',
     controller: 'DefaultOutingsCtrl',
     resolve: {
       defaultOutings: ["defaultOutingsSvc", function (defaultOutingsSvc) {
-        console.log("resolving")
         return defaultOutingsSvc.getAll();
       }]
     }
+  })
+  .state('defaultOutings-list', {
+    url: '/list',
+    templateUrl: 'outings/_default_outings_list.html',
+    parent: 'defaultOutings'
+  })
+  .state('defaultOutings-new', {
+    url: '/new',
+    templateUrl: 'outings/_default_outings_new.html',
+    parent: 'defaultOutings'
   });
 
   $urlRouterProvider.otherwise('schedule');
