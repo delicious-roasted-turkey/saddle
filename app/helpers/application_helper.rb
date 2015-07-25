@@ -17,6 +17,21 @@ module ApplicationHelper
       )
   end
 
+  def bs_fg_begin id, label
+    %Q(
+        <div class="form-group">
+          <label for="#{id}" class="col-sm-2 control-label">#{label}</label>
+          <div class="col-sm-10">
+      )
+  end
+
+  def bs_fg_end
+    %q(
+          </div>
+        </div>
+      )
+  end
+
   private
 
   def rand_str

@@ -5,7 +5,7 @@
 </div>
 <div class="clearfix" ng-repeat="outing in defaultOutings">
   {{outing.time}} {{outing.name}}
-  <a class="btn btn-link pull-right">
+  <a class="btn btn-link pull-right" ui-sref="defaultOutings-delete({id:{{outing.id}}})">
     <span class="fa fa-fw fa-trash"></span>Eliminar
   </a>
 </div>

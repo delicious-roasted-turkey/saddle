@@ -39,23 +39,36 @@ function($stateProvider, $urlRouterProvider, $compileProvider){
 
   .state('defaultOutings', {
     url: '/default-outings',
-    templateUrl: 'outings/_default_outings.html',
-    controller: 'DefaultOutingsCtrl',
+    templateUrl: 'outings/_default_outings.html'
+  })
+  .state('defaultOutings-list', {
+    url: '/list',
+    parent: 'defaultOutings',
+    templateUrl: 'outings/_default_outings_list.html',
+    controller: 'DefaultOutingsListCtrl',
     resolve: {
       defaultOutings: ["defaultOutingsSvc", function (defaultOutingsSvc) {
         return defaultOutingsSvc.getAll();
       }]
     }
   })
-  .state('defaultOutings-list', {
-    url: '/list',
-    templateUrl: 'outings/_default_outings_list.html',
-    parent: 'defaultOutings'
-  })
   .state('defaultOutings-new', {
     url: '/new',
-    templateUrl: 'outings/_default_outings_new.html',
-    parent: 'defaultOutings'
+    parent: 'defaultOutings',
+    controller: 'AddDefaultOutingCtrl',
+    templateUrl: 'outings/_default_outings_new.html'
+  })
+  .state('defaultOutings-delete', {
+    url: '/:id/delete',
+    parent: 'defaultOutings',
+    controller: 'DeleteDefaultOutingCtrl',
+    templateUrl: 'outings/_default_outings_delete.html',
+    resolve: {
+     defaultOuting: ['$stateParams', 'defaultOutingsSvc', function(sp, svc){
+       return svc.get(sp.id);
+     }]
+    }
+
   });
 
   $urlRouterProvider.otherwise('schedule');

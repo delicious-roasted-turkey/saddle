@@ -1,5 +1,5 @@
 angular.module("saddle")
-.controller("DefaultOutingsCtrl", [
+.controller("DefaultOutingsListCtrl", [
 "$scope",
 "defaultOutings",
 function($scope, defaultOutings){

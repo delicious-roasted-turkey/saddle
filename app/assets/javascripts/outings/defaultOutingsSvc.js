@@ -5,17 +5,29 @@
     "utils",
     function($resource, utils){
 
-      var resource = $resource('/default_outings');
+      var resource = $resource('/default_outings/:id');
 
-      /**
-       * Returns all default outings.
-       */
       function getAll(){
         return resource.query().$promise;
       }
 
+      function create(defOuting){
+        return resource.save(defOuting).$promise;
+      }
+
+      function get(id){
+        return resource.get({id: id}).$promise;
+      }
+
+      function destroy(id){
+        return resource.delete({id: id}).$promise;
+      }
+
       return {
-        getAll: getAll
+        getAll: getAll,
+        create: create,
+        get: get,
+        destroy: destroy
       }
   }])
 }());

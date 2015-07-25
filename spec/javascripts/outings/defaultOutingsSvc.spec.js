@@ -1,4 +1,4 @@
-describe("Default outings controller", function(){
+describe("Default outings service", function(){
 
   var svc;
 
@@ -13,4 +13,7 @@ describe("Default outings controller", function(){
     expect(typeof svc.getAll).toBe('function')
   });
 
+  it("responds to create()", function(){
+    expect(typeof svc.create).toBe('function')
+  });
 });

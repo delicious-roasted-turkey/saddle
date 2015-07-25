@@ -1,13 +1,18 @@
 
-<form class="form-horizontal">
+<form novalidate ng-submit="submit()" ng-class="{'atmp-submit': atmpSubmit}" class="form-horizontal" name="new_defout_form">
 
-  <%= form_group 'defaultOuting.time', 'Hora', :text %>
-  <%= form_group 'defaultOuting.name', 'Nom', :text %>
+  <%= bs_fg_begin 'defout-new-time', 'Hora' %>
+    <input ng-model="defaultOuting.time" class="form-control" type="text" id="defout-new-time" saddle-validate-time>
+  <%= bs_fg_end %>
+
+  <%= bs_fg_begin 'defout-new-name', 'Nom' %>
+    <input required ng-model="defaultOuting.name" class="form-control" type="text" id="defout-new-name">
+  <%= bs_fg_end %>
 
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10 text-right">
       <button type="button" ui-sref="defaultOutings-list" class="btn btn-default">Cancel·lar</button>
-      <button type="button" ng-click="submit()" class="btn btn-primary">Acceptar</button>
+      <button type="submit" class="btn btn-primary">Acceptar</button>
     </div>
   </div>
 </form>
