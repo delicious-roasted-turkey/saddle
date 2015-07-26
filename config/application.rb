@@ -24,6 +24,7 @@ module Saddle
     config.active_record.raise_in_transactional_callbacks = true
 
     config.generators.assets = false
+    config.generators.helper = false
     config.generators.template_engine = false
 
   end

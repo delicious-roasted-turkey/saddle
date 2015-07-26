@@ -1,7 +1,8 @@
 angular.module("saddle")
 .controller("RootCtrl", [
   "$scope",
-  function($scope){
+  "$state",
+  function($scope, $state){
 
     // Define links to be seen on navbar
     function NavbarLink(state, text){
@@ -11,8 +12,17 @@ angular.module("saddle")
 
     var navbarLinks = [
       new NavbarLink("schedule", "Reserves"),
-      new NavbarLink("defaultOutings-list", "Excursions")
+      new NavbarLink("defaultOutings", "Excursions")
     ];
 
+    /**
+     * Transitions to previous state
+     */
+    function goBack(){
+      $state.go($scope.$previousState, $scope.$previousStateParams);
+    }
+
     $scope.navbarLinks = navbarLinks;
+    $scope.goBack = goBack;
+
   }]);

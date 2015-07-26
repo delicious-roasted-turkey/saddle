@@ -1,11 +1,11 @@
 <h3>Nova reserva</h3>
 
-<form class="form-horizontal">
+<form class="form-horizontal" ng-class="{'atmp-submit': atmpSubmit}" name="resv_form">
 
   <div class="form-group">
     <div class="col-sm-10 col-sm-offset-2">
       <p class="form-control-static">
-        {{day.localDate.moment | amDateFormat:'dddd'}} {{day.localDate.moment | amDateFormat:'ll'}} {{outing.time.asStr}}
+        {{outing.day.date | amDateFormat:'dddd'}} {{day.localDate.moment | amDateFormat:'ll'}} {{outing.time.asStr}}
       </p>
       <p class="form-control-static">
         {{outing.name}}
@@ -13,29 +13,33 @@
     </div>
   </div>
 
-  <%= form_group 'reservation.numPersons', 'Num. persones', :number %>
-  <%= form_group 'reservation.name', 'Nom contacte', :text %>
-  <%= form_group 'reservation.phone', 'Telèfon', :tel %>
+  <%= bs_fg_begin 'resv-num-adults', 'Adults', columns:(1..6) %>
+    <input ng-model="reservation.numAdults" class="form-control" type="number" id="resv-num-adults">
+  <%= bs_fg_end columns:(1..6)%>
 
-  <div class="form-group">
-    <label class="col-sm-2 control-label">Nivell</label>
-    <div class="col-sm-10">
-      <p class="form-control-static text-muted">(Aquí hi hauria manera d'indicar el nivell de les persones del grup.)</p>
-    </div>
-  </div>
+  <%= bs_fg_begin 'resv-num-children', 'Nens', columns: (7..12) %>
+    <input ng-model="reservation.numChildren" class="form-control" type="number" id="resv-num-children">
+  <%= bs_fg_end columns: (7..12)%>
 
-  <!-- TODO modify "form_group" helper method so that it can render textareas as well.
-        Or write a new method. -->
+  <%= bs_fg_begin 'resv-skill-level', 'Nivell' %>
+    <input ng-model="reservation.skillLevel" class="form-control" type="text" id="resv-skill-level">
+  <%= bs_fg_end %>
 
-  <div class="form-group">
-    <label for="add-reservation-comments" class="col-sm-2 control-label">Observacions</label>
-    <div class="col-sm-10">
-      <textarea ng-model="reservation.comments" type="tel" class="form-control" id="add-reservation-comments"></textarea>
-    </div>
-  </div>
+  <%= bs_fg_begin 'resv-name', 'Contacte' %>
+    <input ng-model="reservation.name" class="form-control" type="text" id="resv-name">
+  <%= bs_fg_end %>
+
+  <%= bs_fg_begin 'resv-phone', 'Telèfon' %>
+    <input ng-model="reservation.phone" class="form-control" type="text" id="resv-phone">
+  <%= bs_fg_end %>
+
+  <%= bs_fg_begin 'resv-comments', 'Observacions' %>
+    <textarea ng-model="reservation.comments" type="tel" class="form-control" id="resv-comments"></textarea>
+  <%= bs_fg_end %>
+
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10 text-right">
-      <button type="button" ng-click="goToSchedule()" class="btn btn-default">Cancel·lar</button>
+      <button type="button" ng-click="goBack()" class="btn btn-default">Cancel·lar</button>
       <button type="button" ng-click="submit()" class="btn btn-primary">Acceptar</button>
     </div>
   </div>

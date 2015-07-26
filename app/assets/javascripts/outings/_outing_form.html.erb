@@ -1,0 +1,22 @@
+
+<form novalidate ng-submit="submit()" ng-class="{'atmp-submit': atmpSubmit}" class="form-horizontal" name="outing_form">
+
+  <%= bs_fg_begin 'outing-new-date', 'Data' %>
+  <p class="form-control-static" id="outing-new-time">{{outing.day.date | saddleLongDate}}</p>
+  <%= bs_fg_end %>
+
+  <%= bs_fg_begin 'outing-new-time', 'Hora' %>
+  <input ng-model="outing.time" class="form-control" type="text" id="outing-new-time" saddle-validate-time>
+  <%= bs_fg_end %>
+
+  <%= bs_fg_begin 'outing-new-name', 'Nom' %>
+  <input ng-model="outing.name" class="form-control" type="text" id="outing-new-name">
+  <%= bs_fg_end %>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10 text-right">
+      <button type="button" ng-click="goBack()" class="btn btn-default">Cancel·lar</button>
+      <button type="submit" class="btn btn-primary">Acceptar</button>
+    </div>
+  </div>
+</form>

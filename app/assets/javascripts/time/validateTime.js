@@ -1,8 +1,7 @@
 angular.module('saddle')
 .directive('saddleValidateTime', [
   'timeSvc',
-  '$parse',
-  function(timeSvc, $parse){
+  function(timeSvc){
 
     return {
       require: 'ngModel',

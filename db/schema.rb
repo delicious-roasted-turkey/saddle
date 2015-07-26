@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150719155752) do
+ActiveRecord::Schema.define(version: 20150725233938) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "days", force: :cascade do |t|
+    t.date     "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "days", ["date"], name: "index_days_on_date", unique: true, using: :btree
 
   create_table "default_outings", force: :cascade do |t|
     t.string   "name"
@@ -23,4 +31,22 @@ ActiveRecord::Schema.define(version: 20150719155752) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "my_models", force: :cascade do |t|
+    t.date     "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "outings", force: :cascade do |t|
+    t.string   "time"
+    t.integer  "day_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "name"
+    t.boolean  "confirmed"
+  end
+
+  add_index "outings", ["day_id"], name: "index_outings_on_day_id", using: :btree
+
+  add_foreign_key "outings", "days"
 end

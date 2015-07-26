@@ -6,7 +6,7 @@
     </a> 
   </div>
   <div class="col-xs-8 text-center">
-    {{day.localDate.moment | amDateFormat:'dddd'}} {{day.localDate.moment | amDateFormat:'ll'}}
+    {{localDate | saddleLongDate}}
   </div>
   <div class="col-xs-2 text-right">
     <a role="button" ng-click="nextDay()">
@@ -15,22 +15,32 @@
   </div>
 </div>
 
-<div class="row outing" ng-repeat-start="outing in day.outings">
-  <div class="col-sm-9">
+<div class="row clearfix">
+  <a ui-sref="outings-new({date:'{{localDate.asStr}}'})" class="btn btn-primary pull-right">
+    <span class="fa fa-fw fa-plus"></span>Excursió
+  </a>
+</div>
+
+<div class="row outing" ng-class="{'outing-confirmed': outing.confirmed}" ng-repeat-start="outing in day.outings">
+  <div class="col-sm-12 clearfix">
     <span class="h3">
-      {{outing.time.asStr}} {{outing.name}}
+      {{outing.time}} {{outing.name}}
     </span>
+    <div class="pull-right">
+        <span class="h3">
+          {{reservedPlaces(outing)}} / {{numAvailableHorses}}
+        </span>
+        <button class="btn btn-link" ng-show="!outing.confirmed"><span class="fa fa-fw fa-check"/></button>
+        <button class="btn btn-link" ui-sref="outings-edit({id:{{outing.id}}})"><span class="fa fa-fw fa-pencil"/></button>
+        <button class="btn btn-link" ui-sref="outings-delete({id:{{outing.id}}})"><span class="fa fa-fw fa-trash"/></button>
+    </div>
   </div>
-  <div class="col-sm-3 text-right">
-    <span class="h3">
-      {{reservedPlaces(outing)}} / {{numAvailableHorses}}
-    </span>
-  </div>
+
 </div>
 <div class="row">
   <div class="col-xs-12 text-right">
     <a role="button" ui-sref="addReservation({day:day, outing: outing})">
-        <span class="fa fa-plus"></span> Afegir reserva
+        <span class="fa fa-plus"></span> Reserva
     </a>
   </div>
 </div>

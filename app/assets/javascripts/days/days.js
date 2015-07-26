@@ -3,24 +3,21 @@
  */
 ;(function(){
 
-  function days(localDates, localTimes, sampleData, numAvailableHorses){
+  function days($resource, localDates, sampleData, numAvailableHorses){
 
     var sampleDays;
 
-    //function Day(localDate){
-    //  this.localDate = localDate;
-    //}
-    //
-    //function Outing(name, time){
-    //  this.name = name;
-    //  this.time = time;
-    //}
+    var resource = $resource('/days/:date');
 
     /**
      * Returns the day that corresponds with the given
      * date.
      */
     function byDate(localDate){
+
+      if((typeof localDate) === 'string'){
+        localDate = localDates.fromIso8601(localDate)
+      }
 
       if(!sampleDays){
         sampleDays = {};
@@ -35,17 +32,31 @@
           outings: []
         };
       }
-      return sampleDays[localDate.asStr];
 
-      //var day = new Day(localDate);
-      //
-      //day.outings = [
-      //  new Outing("Fustam", localTimes.get("09:00")),
-      //  new Outing("Mitjana", localTimes.get("12:00")),
-      //  new Outing("Fustam", localTimes.get("17:00"))
-      //];
-      //
-      //return day;
+      var sampleOutings = sampleDays[localDate.asStr].outings;
+      sampleOutings.forEach(function(so){
+        so.id = -1;
+        so.confirmed=true;
+      });
+
+      var pm = resource.get({date: localDate.asStr}).$promise;
+
+      pm.then(function(data){
+        if(!data.outings){
+          data.outings = [];
+        }
+
+        // Placeholder reservations array. Only necessary
+        // until implemented in backend
+        data.outings.forEach(function(o){o.reservations = []; })
+
+        if(sampleOutings.length) {
+          data.outings = sampleOutings;
+        }
+      });
+
+      return pm;
+
     }
 
     /**
@@ -132,13 +143,13 @@
           outings: [
             {
               name: "Fustam",
-              time: localTimes.get("09:00")
+              time: "09:00"
             },{
               name: "Mitjana",
-              time: localTimes.get("12:00")
+              time: "12:00"
             },{
               name: "Fustam",
-              time: localTimes.get("18:00")
+              time: "18:00"
             }
           ]
         },{
@@ -146,13 +157,13 @@
           outings: [
             {
               name: "Fustam",
-              time: localTimes.get("10:00")
+              time: "10:00"
             },{
               name: "Mitjana",
-              time: localTimes.get("12:30")
+              time: "12:30"
             },{
               name: "Fustam",
-              time: localTimes.get("19:00")
+              time: "19:00"
             }
           ]
         },{
@@ -160,13 +171,13 @@
           outings: [
             {
               name: "Fustam",
-              time: localTimes.get("09:00")
+              time: "09:00"
             },{
               name: "Mitjana",
-              time: localTimes.get("16:30")
+              time: "16:30"
             },{
               name: "Fustam",
-              time: localTimes.get("18:00")
+              time: "18:00"
             }
           ]
         },{
@@ -174,13 +185,13 @@
           outings: [
             {
               name: "Fustam",
-              time: localTimes.get("09:00")
+              time: "09:00"
             },{
               name: "Mitjana",
-              time: localTimes.get("16:30")
+              time: "16:30"
             },{
               name: "Fustam",
-              time: localTimes.get("18:00")
+              time: "18:00"
             }
           ]
         },{
@@ -188,13 +199,13 @@
           outings: [
             {
               name: "Fustam",
-              time: localTimes.get("09:00")
+              time: "09:00"
             },{
               name: "Mitjana",
-              time: localTimes.get("17:00")
+              time: "17:00"
             },{
               name: "Fustam",
-              time: localTimes.get("18:30")
+              time: "18:30"
             }
           ]
         }
@@ -226,6 +237,6 @@
   }
 
   angular.module("saddle")
-    .factory("days", ["localDates", "localTimes", "sampleData", "numAvailableHorses", days]);
+    .factory("days", ["$resource", "localDates", "sampleData", "numAvailableHorses", days]);
 
 }());

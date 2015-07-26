@@ -2,8 +2,7 @@
   angular.module("saddle")
   .factory("defaultOutingsSvc", [
     '$resource',
-    "utils",
-    function($resource, utils){
+    function($resource){
 
       var resource = $resource('/default_outings/:id');
 
@@ -12,7 +11,9 @@
       }
 
       function create(defOuting){
-        return resource.save(defOuting).$promise;
+        return resource.save({
+          defaultOuting: defOuting
+        }).$promise;
       }
 
       function get(id){

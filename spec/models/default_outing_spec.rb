@@ -3,15 +3,15 @@ require 'spec_helper'
 
 RSpec.describe DefaultOuting, type: :model do
 
-  describe "attributes" do
+  describe 'attributes' do
     it {should respond_to :name, :time}
   end
 
-  describe "validation" do
+  describe 'validation' do
 
     describe 'name' do
-      it { should accept_values_for(:name, "Morning walk", "!!") }
-      it { should_not accept_values_for(:name, nil, "", " ")}
+      it { should accept_values_for(:name, 'Morning walk', '!!') }
+      it { should_not accept_values_for(:name, nil, '', ' ')}
     end
 
     describe 'time' do

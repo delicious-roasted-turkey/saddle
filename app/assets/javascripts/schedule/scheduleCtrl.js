@@ -1,20 +1,25 @@
-angular.module("saddle")
-.controller("ScheduleCtrl", [
-"$scope",
-"$stateParams",
-"localDates",
-"days",
-"numAvailableHorses",
-function($scope, $stateParams, localDates, days, numAvailableHorses){
+angular.module('saddle')
+.controller('ScheduleCtrl', [
+'$scope',
+'$stateParams',
+'$state',
+'localDates',
+'days',
+'numAvailableHorses',
+'day',
+function($scope, $stateParams, $state, localDates, days, numAvailableHorses, day){
 
-  $scope.day = $stateParams.day || days.byDate(localDates.today());
+  var localDate = localDates.fromIso8601(day.date);
+
+  $scope.localDate = localDate;
+  $scope.day = day;
 
   $scope.nextDay = function(){
-    $scope.day = days.byDate($scope.day.localDate.nextDay());
+    $state.go('schedule', {date: localDate.nextDay().asStr});
   };
 
   $scope.prevDay = function(){
-    $scope.day = days.byDate($scope.day.localDate.prevDay());
+    $state.go('schedule', {date: localDate.prevDay().asStr});
   };
 
   $scope.numAvailableHorses = numAvailableHorses;
@@ -26,5 +31,12 @@ function($scope, $stateParams, localDates, days, numAvailableHorses){
     }, 0
     );
   }
+
+}]);
+
+
+angular.module('saddle')
+.run(['$rootScope', '$state', 'localDates', function($rootScope, $state, localDates) {
+
 
 }]);
