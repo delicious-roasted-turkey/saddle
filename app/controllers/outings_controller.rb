@@ -7,8 +7,8 @@ class OutingsController < ApplicationController
   end
 
   def show
-    outing = Outing.find(params[:id])
-    render json: outing.to_json(:include => :day)
+    @outing = Outing.find(params[:id])
+    # render json: outing.to_json(:include => :day)
   end
 
   def update

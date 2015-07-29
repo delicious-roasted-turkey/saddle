@@ -4,10 +4,9 @@ angular.module('saddle')
 '$stateParams',
 '$state',
 'localDates',
-'days',
 'numAvailableHorses',
 'day',
-function($scope, $stateParams, $state, localDates, days, numAvailableHorses, day){
+function($scope, $stateParams, $state, localDates, nut mAvailableHorses, day){
 
   var localDate = localDates.fromIso8601(day.date);
 

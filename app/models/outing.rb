@@ -1,6 +1,7 @@
 class Outing < ActiveRecord::Base
 
   belongs_to :day
+  has_many :reservations
 
   validates :time, presence: true , local_time: true
   validates :day, presence: true

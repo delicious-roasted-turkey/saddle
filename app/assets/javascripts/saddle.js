@@ -59,33 +59,58 @@ function($stateProvider, $urlRouterProvider){
     templateUrl: 'schedule/_schedule.html',
     controller: 'ScheduleCtrl',
     resolve: {
-      day: ['$stateParams', 'days', function($sp, days){
-        return days.byDate($sp.date);
+      day: ['$stateParams', 'daysSvc', function($sp, daysSvc){
+        return daysSvc.byDate($sp.date);
       }]
     }
   })
-  .state('addReservation', {
+  .state('reservations-new', {
     parent: 'reservations',
-    url: '/add',
+    url: '/new',
     templateUrl: 'reservations/_reservation_form.html',
-    controller: 'AddReservationCtrl',
+    controller: 'ReservationFormCtrl',
     params: {
-      day: null,
-      outing: null
+      outingId: null
+    },
+    resolve: {
+      crudType: function () { return 'CREATE'; },
+      reservation: ['$stateParams', 'reservationsSvc', function($sp, svc){
+        return svc.getNew($sp.outingId)
+      }],
+      outing: ['$stateParams', 'outingsSvc', function($sp, oSvc){
+        return oSvc.get($sp.outingId);
+      }]
     }
   })
-  .state('editReservation', {
+  .state('reservations-edit', {
     parent: 'reservations',
-    url: '/edit',
+    url: '/:id/edit',
     templateUrl: 'reservations/_reservation_form.html',
-    controller: 'EditReservationCtrl',
-    params: {
-      day: null,
-      outing: null,
-      reservation: null
+    controller: 'ReservationFormCtrl',
+    resolve: {
+      crudType: function () { return 'EDIT'; },
+      reservation: ['$stateParams', 'reservationsSvc', function ($sp, svc) {
+        return svc.get($sp.id);
+      }],
+      outing: ['reservation', 'outingsSvc', function(reservation, oSvc){
+        return oSvc.get(reservation.outingId);
+      }]
     }
   })
-
+  .state('reservations-delete', {
+    parent: 'reservations',
+    url: '/:id/delete',
+    controller: 'DeleteReservationCtrl',
+    templateUrl: 'reservations/_reservation_delete.html',
+    resolve: {
+      reservation: ['$stateParams', 'reservationsSvc', function ($sp, svc) {
+        return svc.get($sp.id);
+      }],
+      outing: ['reservation', 'outingsSvc', function(reservation, oSvc){
+        return oSvc.get(reservation.outingId);
+      }]
+    }
+  })
   .state('defaultOutings', {
     url: '/default-outings',
     templateUrl: 'outings/_default_outings.html'
