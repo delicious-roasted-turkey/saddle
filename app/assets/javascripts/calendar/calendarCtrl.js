@@ -5,12 +5,14 @@ angular.module('saddle')
 '$stateParams',
 'localDates',
 'daysSvc',
-function($scope, $state, $stateParams, localDates, daysSvc){
+'uiCalendarConfig',
+function($scope, $state, $stateParams, localDates, daysSvc, uiCalendarConfig){
 
   var date = $stateParams.date || localDates.today().asStr;
 
   $scope.calendarConfig = {
     defaultDate: date,
+    header: 'false',
     timeFormat: 'HH:mm',
     lang: 'ca',
 
@@ -39,9 +41,25 @@ function($scope, $state, $stateParams, localDates, daysSvc){
     },
     eventClick: function(event) {
       $state.go('schedule', {date: event.date});
+    },
+
+    viewRender: function(view, element) {
+      $scope.date = view.intervalStart;
     }
   };
 
+  $scope.nextMonth = function(){
+    getCalendar().fullCalendar('next');
+  }
+
+  $scope.prevMonth = function(){
+    getCalendar().fullCalendar('prev');
+  }
+
+  function getCalendar(){
+    // The calendar is named in the template as "myCalendar".
+    return uiCalendarConfig.calendars.myCalendar;
+  }
   /**
    * Given an array of days, extracts their outings
    * and returns them as calendar events.
