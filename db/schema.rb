@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150726190430) do
+ActiveRecord::Schema.define(version: 20150729195204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,13 +40,14 @@ ActiveRecord::Schema.define(version: 20150726190430) do
   create_table "outings", force: :cascade do |t|
     t.string   "time"
     t.integer  "day_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.string   "name"
-    t.boolean  "confirmed"
+    t.integer  "default_outing_id"
   end
 
   add_index "outings", ["day_id"], name: "index_outings_on_day_id", using: :btree
+  add_index "outings", ["default_outing_id"], name: "index_outings_on_default_outing_id", using: :btree
 
   create_table "reservations", force: :cascade do |t|
     t.integer  "num_adults"
@@ -63,5 +64,6 @@ ActiveRecord::Schema.define(version: 20150726190430) do
   add_index "reservations", ["outing_id"], name: "index_reservations_on_outing_id", using: :btree
 
   add_foreign_key "outings", "days"
+  add_foreign_key "outings", "default_outings"
   add_foreign_key "reservations", "outings"
 end

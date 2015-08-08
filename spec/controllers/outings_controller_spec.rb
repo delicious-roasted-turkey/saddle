@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'support/render_views'
 
 RSpec.describe OutingsController, type: :controller do
 
@@ -34,7 +35,7 @@ RSpec.describe OutingsController, type: :controller do
   describe 'show' do
 
     it 'responds' do
-      expect{get 'show', :id => @outing.id}.to_not raise_error
+      expect{get 'show', :format => :json, :id => @outing.id}.to_not raise_error
     end
   end
 

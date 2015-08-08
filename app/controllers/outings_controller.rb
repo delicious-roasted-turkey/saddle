@@ -8,7 +8,6 @@ class OutingsController < ApplicationController
 
   def show
     @outing = Outing.find(params[:id])
-    # render json: outing.to_json(:include => :day)
   end
 
   def update
@@ -18,6 +17,14 @@ class OutingsController < ApplicationController
 
   def destroy
     Outing.destroy(params[:id])
+    render json: nil
+  end
+
+  def confirm
+    date = params.require :date
+    default_outing_id = params.require :default_outing_id
+    default_outing = DefaultOuting.find default_outing_id
+    Outing.create_from_default default_outing, date
     render json: nil
   end
 

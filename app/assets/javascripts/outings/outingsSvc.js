@@ -2,7 +2,11 @@ angular.module('saddle')
 .factory('outingsSvc', ['$resource', function($resource){
 
   var resource = $resource('/outings/:id.json', {id:'@outing.id'}, {
-    update: { method: 'PUT' }
+    update: { method: 'PUT' },
+    confirm: {
+      url: '/outings/confirm',
+      method: 'POST'
+    }
   });
 
   function getNew(date){
@@ -10,6 +14,10 @@ angular.module('saddle')
     outing.day = {};
     outing.day.date = date;
     return outing;
+  }
+
+  function confirmOuting(date, defaultOutingId){
+    return resource.confirm({ date:date, defaultOutingId: defaultOutingId }).$promise
   }
 
   return {
@@ -26,6 +34,7 @@ angular.module('saddle')
       return resource.delete({id: id}).$promise;
     },
 
-    getNew: getNew
+    getNew: getNew,
+    confirmOuting: confirmOuting
   }
 }]);

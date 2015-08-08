@@ -21,7 +21,7 @@
   </a>
 </div>
 
-<div class="row outing" ng-class="{'outing-confirmed': outing.confirmed}" ng-repeat-start="outing in day.outings">
+<div class="row outing" ng-class="{'outing-confirmed': outing.confirmed}" ng-repeat-start="outing in day.outings | orderBy : 'time' ">
   <div class="col-sm-12 clearfix">
     <span class="h3">
       {{outing.time}} {{outing.name}}
@@ -30,16 +30,20 @@
         <span class="h3">
           {{reservedPlaces(outing)}} / {{numAvailableHorses}}
         </span>
-        <button class="btn btn-link" ng-show="!outing.confirmed"><span class="fa fa-fw fa-check"/></button>
+      <div ng-show="outing.confirmed">
         <button class="btn btn-link" ui-sref="outings-edit({id:{{outing.id}}})"><span class="fa fa-fw fa-pencil"/></button>
         <button class="btn btn-link" ui-sref="outings-delete({id:{{outing.id}}})" ng-show="!outing.reservations.length">
           <span class="fa fa-fw fa-trash"/>
         </button>
+      </div>
+      <div ng-show="!outing.confirmed">
+        <button class="btn btn-link" ng-show="!outing.confirmed" ng-click="confirmOuting(outing.defaultOutingId)"><span class="fa fa-fw fa-check"/></button>
+      </div>
     </div>
   </div>
 
 </div>
-<div class="row">
+<div class="row" ng-show="outing.confirmed">
   <div class="col-xs-12 text-right">
     <a role="button" ui-sref="reservations-new({outingId: {{outing.id}}})">
         <span class="fa fa-plus"></span> Reserva

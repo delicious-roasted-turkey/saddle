@@ -5,8 +5,9 @@ angular.module('saddle')
 '$state',
 'localDates',
 'numAvailableHorses',
+'outingsSvc',
 'day',
-function($scope, $stateParams, $state, localDates, nut mAvailableHorses, day){
+function($scope, $stateParams, $state, localDates, numAvailableHorses, outingsSvc, day){
 
   var localDate = localDates.fromIso8601(day.date);
 
@@ -19,6 +20,15 @@ function($scope, $stateParams, $state, localDates, nut mAvailableHorses, day){
 
   $scope.prevDay = function(){
     $state.go('schedule', {date: localDate.prevDay().asStr});
+  };
+
+  $scope.confirmOuting = function(defaultOutingId){
+    outingsSvc.confirmOuting(day.date, defaultOutingId)
+      .then(function(){
+        // Reload same day
+        //$state.go('schedule', {date: localDate.asStr})
+        $state.reload()
+      })
   };
 
   $scope.numAvailableHorses = numAvailableHorses;

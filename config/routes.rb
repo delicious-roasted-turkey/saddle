@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :days, :except => :show
   get 'days/:date' => 'days#show'
 
+  post 'outings/confirm' => 'outings#confirm'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
