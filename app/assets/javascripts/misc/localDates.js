@@ -50,7 +50,8 @@
   function localDates(){
     return {
       today: today,
-      fromIso8601: fromIso8601
+      fromIso8601: fromIso8601,
+      fromMoment: fromMoment
     }
   };
 

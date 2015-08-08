@@ -3,7 +3,3 @@ json.confirmed outing.confirmed?
 
 # If the outing is not persisted, give it an id of 0
 json.id 0 if !outing.id
-
-json.reservations outing.reservations do |reservation|
-  json.partial! reservation
-end

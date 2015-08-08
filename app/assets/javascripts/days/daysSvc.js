@@ -6,7 +6,13 @@ angular.module("saddle")
   "$resource",
   function days($resource){
 
-    var resource = $resource('/days/:date.json');
+    var resource = $resource('/days/:date.json', {}, {
+      range: {
+        url: '/days/range.json',
+        method: 'GET',
+        isArray: true
+      }
+    });
 
     /**
      * Returns the day that corresponds with the given
@@ -19,8 +25,13 @@ angular.module("saddle")
       return resource.get({date: localDate}).$promise;
     }
 
+    function range(start, end){
+      return resource.range({start: start, end: end}).$promise;
+    }
+
     return {
-      byDate: byDate
+      byDate: byDate,
+      range: range
     }
   }
 ]);

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   #Days are referenced by date
   resources :days, :except => :show
+  get 'days/range' => 'days#range'
   get 'days/:date' => 'days#show'
 
   post 'outings/confirm' => 'outings#confirm'

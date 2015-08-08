@@ -1,3 +1,6 @@
+//  (jQuery is required by bootsrap and fullacalendar)
+//= require jquery
+
 //= require angular
 //= require angular-rails-templates
 //= require angular-ui-router
@@ -6,9 +9,9 @@
 //= require moment
 //= require moment/locale/ca.js
 //= require angular-moment
+//= require fullcalendar
+//= require angular-ui-calendar
 //
-//  (jQuery is required by bootsrap)
-//= require jquery
 //= require bootstrap-sass/assets/javascripts/bootstrap-sprockets
 //= require ./saddle.js
 //= require_tree .

@@ -1,4 +1,4 @@
-angular.module('saddle', ['ui.router', 'templates', 'ngResource', 'angularMoment'])
+angular.module('saddle', ['ui.router', 'templates', 'ngResource', 'angularMoment', 'ui.calendar'])
 .config([
 '$stateProvider',
 '$urlRouterProvider',
@@ -63,6 +63,21 @@ function($stateProvider, $urlRouterProvider){
         return daysSvc.byDate($sp.date);
       }]
     }
+  })
+  .state('calendar', {
+    parent: 'reservations',
+    url: '/calendar',
+    templateUrl: 'calendar/_calendar.html',
+    controller: 'CalendarCtrl',
+    params: {
+      date: null
+    }
+    //  ,
+    //resolve: {
+    //  day: ['$stateParams', 'daysSvc', function($sp, daysSvc){
+    //    return daysSvc.byDate($sp.date);
+    //  }]
+    //}
   })
   .state('reservations-new', {
     parent: 'reservations',

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Day, type: :model do
   
-  describe 'get the date given a date' do
+  describe 'get the day given a date' do
     
     before :each do
       Day.delete_all
@@ -19,6 +19,15 @@ RSpec.describe Day, type: :model do
       expect(day.persisted?).to be false
     end
 
+  end
+
+  describe 'get a range of days' do
+
+    it 'returns the correct range' do
+      days = Day.range '2014-12-02', '2014-12-08'
+      expect(days.first.date.iso8601).to eql '2014-12-02'
+      expect(days.last.date.iso8601).to eql '2014-12-08'
+    end
   end
 
   describe 'unconfirmed outings by default' do

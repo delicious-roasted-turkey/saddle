@@ -11,7 +11,8 @@ angular.module("saddle")
     }
 
     var navbarLinks = [
-      new NavbarLink("schedule", "Reserves"),
+      new NavbarLink("calendar", "Reserves"),
+      //new NavbarLink("schedule", "Reserves"),
       new NavbarLink("defaultOutings", "Excursions")
     ];
 

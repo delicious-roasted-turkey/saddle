@@ -38,7 +38,7 @@
       </div>
       <div ng-show="!outing.confirmed">
         <button class="btn btn-link" ng-show="!outing.confirmed" ng-click="confirmOuting(outing.defaultOutingId)"><span class="fa fa-fw fa-check"/></button>
-        <button class="btn btn-link" ng-click="dismissDefaultOuting(outing.defaultOutingId)">
+        <button class="btn btn-link" ui-sref="outings-delete({id:{{outing.id}}})" ng-show="!outing.reservations.length">
           <span class="fa fa-fw fa-trash"/>
         </button>
       </div>

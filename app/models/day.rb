@@ -25,11 +25,13 @@ class Day < ActiveRecord::Base
     else
       # Create default outings for this day by copying the data
       # from the global default outings
+      existing_outings_def_out_ids = Set.new (outings.map { |o| o.default_outing_id })
+      dismissed_def_out_ids = Set.new (dismissed_default_outings.map {|ddo| ddo.id})
       DefaultOuting.all.each do |def_out|
-        if outings.exists? :default_outing_id => def_out.id
+        if existing_outings_def_out_ids.include? def_out.id
           # There's already an outing that corresponds to this default
           # outing
-        elsif dismissed_default_outings.exists? def_out.id
+        elsif dismissed_def_out_ids.include? def_out.id
           # The default outing has been dismissed for this day
         else
           outings.new (Outing.by_default_outing_params def_out)
@@ -54,6 +56,22 @@ class Day < ActiveRecord::Base
     else
       new date: date
     end
+  end
+
+  def self.range start_date_str, end_date_str
+    start_date = Date.parse start_date_str
+    end_date = Date.parse end_date_str
+    days = Day.where(:date => start_date..end_date)
+    pointer = start_date
+    present_dates = Set.new (days.map { |day| day.date })
+    while pointer <= end_date
+      if !present_dates.include? pointer
+        days << (new date: pointer.iso8601)
+      end
+      pointer = pointer.next_day
+    end
+    days.each { |day| day.put_def_outings }
+    days
   end
 
 end
