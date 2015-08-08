@@ -28,6 +28,13 @@ class OutingsController < ApplicationController
     render json: nil
   end
 
+  def dismiss_default
+    date = params.require :date
+    default_outing_id = params.require :default_outing_id
+    Day.by_date(date).dismiss_default_outing default_outing_id
+    render json: nil
+  end
+
   def model_params
     params.require(:outing).permit(:time, :name)
   end

@@ -1,6 +1,11 @@
 class Day < ActiveRecord::Base
 
-  has_many :outings
+  has_many :outings, :autosave => false
+
+  has_and_belongs_to_many :dismissed_default_outings,
+                          :class_name => 'DefaultOuting',
+                          :join_table => 'dismissed_default_outings',
+                          :readonly => true
 
   validates :date, presence: true
 
@@ -21,12 +26,24 @@ class Day < ActiveRecord::Base
       # Create default outings for this day by copying the data
       # from the global default outings
       DefaultOuting.all.each do |def_out|
-        puts def_out
-        if (outings.find_by_default_outing_id def_out.id).nil?
+        if outings.exists? :default_outing_id => def_out.id
+          # There's already an outing that corresponds to this default
+          # outing
+        elsif dismissed_default_outings.exists? def_out.id
+          # The default outing has been dismissed for this day
+        else
           outings.new (Outing.by_default_outing_params def_out)
         end
       end
     end
+  end
+
+  def dismiss_default_outing def_outing_id
+    def_outing = DefaultOuting.find def_outing_id
+    dismissed_default_outings << def_outing
+    save! if !persisted?
+    outings.reload
+    put_def_outings
   end
 
   private

@@ -25,11 +25,16 @@ function($scope, $stateParams, $state, localDates, numAvailableHorses, outingsSv
   $scope.confirmOuting = function(defaultOutingId){
     outingsSvc.confirmOuting(day.date, defaultOutingId)
       .then(function(){
-        // Reload same day
-        //$state.go('schedule', {date: localDate.asStr})
         $state.reload()
       })
   };
+
+  $scope.dismissDefaultOuting = function(defaultOutingId){
+    outingsSvc.dismissDefault(day.date, defaultOutingId)
+      .then(function(){
+        $state.reload()
+      })
+  }
 
   $scope.numAvailableHorses = numAvailableHorses;
 

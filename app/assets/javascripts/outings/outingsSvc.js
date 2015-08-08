@@ -6,6 +6,10 @@ angular.module('saddle')
     confirm: {
       url: '/outings/confirm',
       method: 'POST'
+    },
+    dismissDefault: {
+      url: '/outings/dismiss_default',
+      method: 'POST'
     }
   });
 
@@ -18,6 +22,10 @@ angular.module('saddle')
 
   function confirmOuting(date, defaultOutingId){
     return resource.confirm({ date:date, defaultOutingId: defaultOutingId }).$promise
+  }
+
+  function dismissDefault(date, defaultOutingId){
+    return resource.dismissDefault({ date:date, defaultOutingId: defaultOutingId }).$promise
   }
 
   return {
@@ -35,6 +43,7 @@ angular.module('saddle')
     },
 
     getNew: getNew,
-    confirmOuting: confirmOuting
+    confirmOuting: confirmOuting,
+    dismissDefault: dismissDefault
   }
 }]);

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get 'days/:date' => 'days#show'
 
   post 'outings/confirm' => 'outings#confirm'
+  post 'outings/dismiss_default' => 'outings#dismiss_default'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -21,32 +21,38 @@ RSpec.describe Day, type: :model do
 
   end
 
-  # describe 'unconfirmed outings by default' do
-  #
-  #   before :each do
-  #     # Create default outings
-  #     DefaultOuting.create :name => 'Morning', :time => '09:00'
-  #     DefaultOuting.create :name => 'Afternoon', :time => '17:00'
-  #   end
-  #
-  #   it 'returns default unconfirmed outings for an unpersisted day in the future' do
-  #     day = Day.by_date 2.days.from_now
-  #     outing = day.outings.select{|o| o.name.eql? 'Morning'}.first
-  #     expect(outing).to_not be_nil
-  #     expect(outing.confirmed).to be false
-  #   end
-  #
-  #   it 'does not return default outings for a persisted day in the future' do
-  #     Day.create! date: 2.days.from_now
-  #     day = Day.by_date 2.days.from_now
-  #     expect(day.outings).to be_empty
-  #   end
-  #
-  #   it 'does not return default outings for a day in the past' do
-  #     day = Day.by_date 2.days.ago
-  #     expect(day.outings).to be_empty
-  #   end
-  #
-  # end
-  
+  describe 'unconfirmed outings by default' do
+
+    before :each do
+      # Create default outings
+      @morning_def_o = DefaultOuting.create :name => 'Morning', :time => '09:00'
+      @afternoon_def_o = DefaultOuting.create :name => 'Afternoon', :time => '17:00'
+    end
+
+    describe 'for days in the future' do
+
+      before :each do
+        @day = Day.by_date 2.days.from_now, :put_def_outings => true
+      end
+
+      it 'returns default unconfirmed outings' do
+        outing = @day.outings.select{|o| o.name.eql? 'Morning'}.first
+        expect(outing).to_not be_nil
+        expect(outing.confirmed?).to be false
+      end
+
+      it 'does not return a default outing if it has been cancelled' do
+        @day.dismiss_default_outing @morning_def_o.id
+        outing = @day.outings.select{|o| o.name.eql? 'Morning'}.first
+        expect(outing).to be_nil
+      end
+
+    end
+
+    it 'does not return default outings for a day in the past' do
+      day = Day.by_date 2.days.ago
+      expect(day.outings).to be_empty
+    end
+
+  end
 end
