@@ -13,7 +13,8 @@ angular.module("saddle")
     var navbarLinks = [
       new NavbarLink("calendar", "Reserves"),
       //new NavbarLink("schedule", "Reserves"),
-      new NavbarLink("defaultOutings", "Excursions")
+      new NavbarLink("defaultOutings", "Excursions"),
+      new NavbarLink("horses", "Cavalls")
     ];
 
     /**

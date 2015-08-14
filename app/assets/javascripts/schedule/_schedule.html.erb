@@ -28,7 +28,7 @@
     </span>
     <div class="pull-right">
         <span class="h3">
-          {{reservedPlaces(outing)}} / {{numAvailableHorses}}
+          {{outing.takenPlaces}} / {{outing.numAvailableHorses}}
         </span>
       <div ng-show="outing.confirmed">
         <button class="btn btn-link" ui-sref="outings-edit({id:{{outing.id}}})"><span class="fa fa-fw fa-pencil"/></button>

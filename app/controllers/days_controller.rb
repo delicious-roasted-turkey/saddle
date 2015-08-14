@@ -8,7 +8,7 @@ class DaysController < ApplicationController
   def range
     start_str = params.require :start
     end_str = params.require :end
-    @days = Day.includes(:outings, :dismissed_default_outings).range start_str, end_str
+    @days = Day.includes({:outings => :reservations}, :dismissed_default_outings).range start_str, end_str
   end
 
 end

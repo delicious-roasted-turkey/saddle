@@ -11,6 +11,8 @@
 //= require angular-moment
 //= require fullcalendar
 //= require angular-ui-calendar
+//= require angular-bootstrap
+//= require angular-i18n/angular-locale_ca
 //
 //= require bootstrap-sass/assets/javascripts/bootstrap-sprockets
 //= require ./saddle.js

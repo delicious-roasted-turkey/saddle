@@ -20,9 +20,9 @@ function($scope, $state, $stateParams, localDates, daysSvc, uiCalendarConfig){
     eventRender: function(event, element){
       element.find(".fc-time").before($("<span/>", {
         "class": "fc-freeplaces",
-        text: "42"
+        text: event.outing.freePlaces
       }));
-      element.toggleClass('confirmed', event.confirmed);
+      element.toggleClass('confirmed', event.outing.confirmed);
     },
 
     // Fetches events from backend
@@ -73,7 +73,7 @@ function($scope, $state, $stateParams, localDates, daysSvc, uiCalendarConfig){
         return {
           title: outing.name,
           start: start,
-          confirmed: outing.confirmed,
+          outing: outing,
           date: day.date
         }
       }));

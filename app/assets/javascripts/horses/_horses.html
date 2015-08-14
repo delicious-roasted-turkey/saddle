@@ -1,0 +1,51 @@
+<h4 class="clearfix">
+  Cavalls
+</h4>
+<hr class="hr"/>
+<p>
+  Disponibles actualment: <b>{{currentCount}}</b>
+</p>
+<div class="clearfix" ng-repeat="horseCount in horseCounts">
+  {{horseCount.numHorses}} disponibles a partir del {{horseCount.from | amDateFormat: 'LLL'}}
+  <a class="btn btn-link pull-right" ng-click="deleteCount(horseCount.id)">
+    <span class="fa fa-fw fa-times"></span>
+  </a>
+</div>
+<hr class="hr"/>
+<a class="link" ng-hide="formVisible" ng-click="showForm()">Canvi de disponibilitat</a>
+<form ng-submit="submit()" class="form-inline" ng-hide="!formVisible">
+  <div class="inline">
+    <input type="number" required ng-model="formVals.numHorses" class="form-control"/> cavalls disponibles
+  </div>
+  <br class="rwd-break"/>
+  <div class="inline">
+    a partir de
+    <div class="checkbox">
+      <label>
+        <input type="radio" ng-model="formVals.newCountFrom" value="now"/> ja
+      </label>
+    </div>
+    <div class="checkbox">
+      <label>
+        <input type="radio" ng-model="formVals.newCountFrom" value="date"/> data
+      </label>
+    </div>
+  </div>
+  <div ng-hide="!dateOptionSelected()">
+    <span class="input-group valign-middle inline">
+      <input type="text" class="form-control" datepicker-popup="dd MMMM yyyy" ng-model="formVals.date" is-open="popupStatus.opened" datepicker-options="dateOptions"/>
+      <span class="input-group-btn">
+        <button type="button" class="btn btn-default" ng-click="openDatePopup()"><i class="glyphicon glyphicon-calendar"></i></button>
+      </span>
+    </span>
+    <span class="valign-middle inline line-height-0">
+      <timepicker class="inline" ng-model="formVals.time"></timepicker>
+    </span>
+  </div>
+  <div>
+    <div class="col-sm-offset-2 col-sm-10 text-right">
+      <button type="button" ng-click="cancelForm()" class="btn btn-default">Cancel·lar</button>
+      <button type="submit" class="btn btn-primary">Acceptar</button>
+    </div>
+  </div>
+</form>

@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   post 'outings/confirm' => 'outings#confirm'
   post 'outings/dismiss_default' => 'outings#dismiss_default'
 
+  get 'available_horse_counts/current_count' => 'available_horse_counts#current_count'
+  resources :available_horse_counts
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

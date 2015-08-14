@@ -5,6 +5,4 @@ class HomeController < ApplicationController
     render "layouts/application"
   end
 
-
-
 end

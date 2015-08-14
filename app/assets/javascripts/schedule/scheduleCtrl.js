@@ -4,10 +4,9 @@ angular.module('saddle')
 '$stateParams',
 '$state',
 'localDates',
-'numAvailableHorses',
 'outingsSvc',
 'day',
-function($scope, $stateParams, $state, localDates, numAvailableHorses, outingsSvc, day){
+function($scope, $stateParams, $state, localDates, outingsSvc, day){
 
   var localDate = localDates.fromIso8601(day.date);
 
@@ -34,16 +33,6 @@ function($scope, $stateParams, $state, localDates, numAvailableHorses, outingsSv
       .then(function(){
         $state.reload()
       })
-  }
-
-  $scope.numAvailableHorses = numAvailableHorses;
-
-  $scope.reservedPlaces = function(outing){
-    return outing.reservations.map(function(r){ return r.numPersons || 0; })
-      .reduce(function(prev, current) {
-        return prev + current;
-    }, 0
-    );
   }
 
 }]);

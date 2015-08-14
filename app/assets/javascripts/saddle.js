@@ -1,4 +1,11 @@
-angular.module('saddle', ['ui.router', 'templates', 'ngResource', 'angularMoment', 'ui.calendar'])
+angular.module('saddle', ['' +
+  'ui.router',
+  'templates',
+  'ngResource',
+  'angularMoment',
+  'ui.calendar',
+  'ui.bootstrap'
+])
 .config([
 '$stateProvider',
 '$urlRouterProvider',
@@ -153,11 +160,25 @@ function($stateProvider, $urlRouterProvider){
     controller: 'DeleteDefaultOutingCtrl',
     templateUrl: 'outings/_default_outings_delete.html',
     resolve: {
-     defaultOuting: ['$stateParams', 'defaultOutingsSvc', function(sp, svc){
-       return svc.get(sp.id);
-     }]
+      defaultOuting: ['$stateParams', 'defaultOutingsSvc', function(sp, svc){
+        return svc.get(sp.id);
+      }]
     }
-  });
+  })
+  .state('horses', {
+    url: '/horses',
+    controller: 'HorsesCtrl',
+    templateUrl: 'horses/_horses.html',
+    resolve: {
+      horseCounts: ['horsesSvc', function(horsesSvc){
+        return horsesSvc.getAll();
+      }],
+      currentCount: ['horsesSvc', function(horsesSvc){
+        return horsesSvc.currentCount();
+      }]
+    }
+  })
+  ;
 
   // Go to today's schedule by default
   $urlRouterProvider.otherwise(function($injector){
@@ -175,6 +196,11 @@ angular.module('saddle')
   $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|skype):/);
 }]);
 
+// Configure angular-moment
+angular.module('saddle')
+.constant('angularMomentConfig', {
+  preprocess: 'utc'
+})
 
 /**
  * Route defaults and redirections.
@@ -224,4 +250,17 @@ angular.module('saddle')
     $rootScope.$previousStateParams = fromParams;
   });
 }]);
+
+
+angular.module('saddle')
+.run(['datepickerPopupConfig', 'timepickerConfig', function(dpc, tpc){
+  // Translate buttons of datepicker
+  dpc.currentText = 'Avui';
+  dpc.clearText = 'Netejar';
+  dpc.closeText = 'Tancar';
+
+  // Default config for timepicker
+  tpc.showMeridian = false;
+}]);
+
 

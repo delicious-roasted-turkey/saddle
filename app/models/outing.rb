@@ -38,6 +38,27 @@ class Outing < ActiveRecord::Base
     Outing.create_confirmed params, date
   end
 
+  def free_places
+    num_available_horses - taken_places
+  end
+
+  def taken_places
+    sum = 0
+    reservations.each do |rv|
+      sum += rv.num_adults
+      sum += rv.num_children
+    end
+    sum
+  end
+
+  def num_available_horses
+    date = day.date.clone
+    hours = Integer self[:time][0,2], 10
+    minutes = Integer self[:time][3,2], 10
+    datetime = DateTime.new(date.year, date.month, date.day, hours, minutes)
+    AvailableHorseCount.count_at_date datetime
+  end
+
   private
 
   def set_default_vals

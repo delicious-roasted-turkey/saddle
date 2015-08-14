@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150808102340) do
+ActiveRecord::Schema.define(version: 20150808205750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "available_horse_counts", force: :cascade do |t|
+    t.integer  "num_horses"
+    t.datetime "from"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "available_horse_counts", ["from"], name: "index_available_horse_counts_on_from", using: :btree
 
   create_table "days", force: :cascade do |t|
     t.date     "date"

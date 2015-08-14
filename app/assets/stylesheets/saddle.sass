@@ -20,8 +20,9 @@ body
   box-shadow: 0 0px 5px rgba(0, 0, 0, 0.35)
   background-color: $saddle-front-bgcolor
 
-
+////////////////
 // Form controls
+////////////////
 
 // Show form controls in red only if they are invalid AND the user has
 // tried to submit de form.
@@ -30,6 +31,11 @@ form.atmp-submit .ng-invalid
   border-color: #e9322d
   box-shadow: 0 0 6px #f8b9b7
 
+// Number inputs should be small
+form.form-inline input[type='number']
+  width: 80px
+
+// Horizontal bars should be visible
 hr
   height: 1px
   background-color: #ccc
@@ -37,9 +43,10 @@ hr
   margin-bottom: 20px
 
 
-/**
- * Calendar
- */
+//////////////
+///Calendar
+/////////////
+
 .fc-event
   .fc-title
     display: block
@@ -48,3 +55,23 @@ hr
 
 .fc-event:not(.confirmed)
   color: lightgray
+
+////////////////
+// Miscellaneous
+////////////////
+a
+  cursor: pointer // even without href
+
+.inline
+  display: inline-block
+.valign-middle
+  vertical-align: middle !important
+.line-height-0
+  line-height: 0 !important
+
+// Responsive line break
+@media screen and (min-width: 768px)
+  .rwd-break
+    display: none
+
+
