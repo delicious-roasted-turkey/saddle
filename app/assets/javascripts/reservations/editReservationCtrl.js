@@ -17,11 +17,11 @@ function($scope, $stateParams, $state){
 
   $scope.submit = function(){
     angular.merge(originalReservation, $scope.reservation);
-    $scope.goToSchedule();
+    $scope.goToDay();
   }
 
-  $scope.goToSchedule = function(){
-    $state.go("schedule", {
+  $scope.goToDay = function(){
+    $state.go("day", {
       day: $scope.day
     })
   }

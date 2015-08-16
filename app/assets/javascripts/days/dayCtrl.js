@@ -1,5 +1,5 @@
 angular.module('saddle')
-.controller('ScheduleCtrl', [
+.controller('DayCtrl', [
 '$scope',
 '$stateParams',
 '$state',
@@ -14,11 +14,11 @@ function($scope, $stateParams, $state, localDates, outingsSvc, day){
   $scope.day = day;
 
   $scope.nextDay = function(){
-    $state.go('schedule', {date: localDate.nextDay().asStr});
+    $state.go('day', {date: localDate.nextDay().asStr});
   };
 
   $scope.prevDay = function(){
-    $state.go('schedule', {date: localDate.prevDay().asStr});
+    $state.go('day', {date: localDate.prevDay().asStr});
   };
 
   $scope.confirmOuting = function(defaultOutingId){

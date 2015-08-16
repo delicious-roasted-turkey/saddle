@@ -43,18 +43,18 @@ footer {
         position: absolute;
         top: 0;
         width: 33%;
-        margin-left: 10px;
+    }
+
+}
+
+@media screen and (min-width: 992px) {
+    .main {
+        padding-top: 20px;
     }
 }
 
 
 /* Sidebar navigation */
-.nav-sidebar {
-    background-color: #f5f5f5;
-    margin-right: -15px;
-    margin-bottom: 20px;
-    margin-left: -15px;
-}
 .nav-sidebar > li > a {
     padding-right: 20px;
     padding-left: 20px;
@@ -69,25 +69,9 @@ footer {
  */
 
 .main {
-    padding: 20px;
     background-color: #fff;
-}
-@media (min-width: 768px) {
-    .main {
-        padding-right: 40px;
-        padding-left: 40px;
-    }
 }
 .main .page-header {
     margin-top: 0;
 }
 
-/*
- * Icon of toggle button must depend on sidebar state (collapsed/not collapsed)
- */
-.row-offcanvas.active button[data-toggle="offcanvas"] .fa-chevron-right {
-    display: none;
-}
-.row-offcanvas:not(.active) button[data-toggle="offcanvas"] .fa-chevron-left {
-    display: none;
-}

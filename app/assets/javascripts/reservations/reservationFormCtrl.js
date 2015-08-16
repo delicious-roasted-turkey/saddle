@@ -21,7 +21,7 @@ function($scope, $state, crudType, reservation, outing, reservationsSvc){
     if($scope.resv_form.$valid) {
       saveAction($scope.reservation)
         .then(function () {
-          $state.go("schedule", {date: $scope.outing.day.date});
+          $state.go("day", {date: $scope.outing.day.date});
         });
     }
   }

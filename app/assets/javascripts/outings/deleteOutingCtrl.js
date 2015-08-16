@@ -12,7 +12,7 @@ function($scope, $state, outingsSvc, outing){
     var date = $scope.outing.day.date;
     outingsSvc.destroy(outing.id)
     .finally(function(){
-      $state.go("schedule", {date: date});
+      $state.go("day", {date: date});
     });
   }
 

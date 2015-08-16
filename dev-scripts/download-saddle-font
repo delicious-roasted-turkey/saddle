@@ -1,0 +1,11 @@
+#!/bin/bash
+#  Downloads a copy of the icon font CSS and puts it in the 
+
+rails_root=$(rails c <<-EORUBY | grep ^rails_root_is | sed 's/rails_root_is//' 
+  puts "rails_root_is#{Rails.root}" 
+EORUBY
+)
+
+output_file=$rails_root/app/assets/stylesheets/saddle-icon-font.css
+
+curl --compressed  http://fontastic.s3.amazonaws.com/UPA8Qt8EWHv5xFMBwc8DrQ/icons.css > $output_file

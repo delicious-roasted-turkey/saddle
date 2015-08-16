@@ -1,0 +1,127 @@
+@charset "UTF-8";
+
+/* saddle */
+@font-face {
+  font-family: "saddle";
+  src:url("https://fontastic.s3.amazonaws.com/UPA8Qt8EWHv5xFMBwc8DrQ/fonts/1439659283.eot");
+  src:url("https://fontastic.s3.amazonaws.com/UPA8Qt8EWHv5xFMBwc8DrQ/fonts/1439659283.eot?#iefix") format("embedded-opentype"),
+    url("https://fontastic.s3.amazonaws.com/UPA8Qt8EWHv5xFMBwc8DrQ/fonts/1439659283.woff") format("woff"),
+    url("https://fontastic.s3.amazonaws.com/UPA8Qt8EWHv5xFMBwc8DrQ/fonts/1439659283.ttf") format("truetype"),
+    url("https://fontastic.s3.amazonaws.com/UPA8Qt8EWHv5xFMBwc8DrQ/fonts/1439659283.svg#1439659283") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+[data-icon]:before {
+  font-family: "saddle" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="saddlefont-"]:before,
+[class*=" saddlefont-"]:before {
+  font-family: "saddle" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.saddlefont-pencil:before {
+  content: "a";
+}
+.saddlefont-trash:before {
+  content: "b";
+}
+.saddlefont-trash-bin:before {
+  content: "c";
+}
+.saddlefont-remove:before {
+  content: "d";
+}
+.saddlefont-cancel:before {
+  content: "e";
+}
+.saddlefont-trash-1:before {
+  content: "f";
+}
+.saddlefont-plus:before {
+  content: "g";
+}
+.saddlefont-plus-circled:before {
+  content: "h";
+}
+.saddlefont-plus-1:before {
+  content: "j";
+}
+.saddlefont-calendar:before {
+  content: "l";
+}
+.saddlefont-calendar-1:before {
+  content: "m";
+}
+.saddlefont-calendar-2:before {
+  content: "n";
+}
+.saddlefont-book-bookmark:before {
+  content: "o";
+}
+.saddlefont-book:before {
+  content: "p";
+}
+.saddlefont-book-1:before {
+  content: "q";
+}
+.saddlefont-users:before {
+  content: "r";
+}
+.saddlefont-male-female:before {
+  content: "u";
+}
+.saddlefont-male:before {
+  content: "v";
+}
+.saddlefont-toilets:before {
+  content: "x";
+}
+.saddlefont-trash-bin-1:before {
+  content: "z";
+}
+.saddlefont-gear-setting-2-1:before {
+  content: "A";
+}
+.saddlefont-torso:before {
+  content: "C";
+}
+.saddlefont-adult:before {
+  content: "D";
+}
+.saddlefont-person:before {
+  content: "F";
+}
+.saddlefont-male-user-3:before {
+  content: "G";
+}
+.saddlefont-directions:before {
+  content: "H";
+}
+.saddlefont-male-1:before {
+  content: "I";
+}
+.saddlefont-torsos-male-female:before {
+  content: "N";
+}
+.saddlefont-horseshoe:before {
+  content: "s";
+}

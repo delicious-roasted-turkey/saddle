@@ -5,7 +5,7 @@
    */
   function LocalDate(iso8601str) {
 
-    var _moment = moment(iso8601str).startOf("day");
+    var _moment = moment.utc(iso8601str).startOf("day");
 
     function nextDay() {
       return add(1, "day");

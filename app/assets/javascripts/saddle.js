@@ -60,11 +60,11 @@ function($stateProvider, $urlRouterProvider){
       }]
     }
   })
-  .state('schedule', {
+  .state('day', {
     parent: 'reservations',
-    url: '/schedule/:date',
-    templateUrl: 'schedule/_schedule.html',
-    controller: 'ScheduleCtrl',
+    url: '/day/:date',
+    templateUrl: 'days/_day.html',
+    controller: 'DayCtrl',
     resolve: {
       day: ['$stateParams', 'daysSvc', function($sp, daysSvc){
         return daysSvc.byDate($sp.date);
@@ -79,12 +79,6 @@ function($stateProvider, $urlRouterProvider){
     params: {
       date: null
     }
-    //  ,
-    //resolve: {
-    //  day: ['$stateParams', 'daysSvc', function($sp, daysSvc){
-    //    return daysSvc.byDate($sp.date);
-    //  }]
-    //}
   })
   .state('reservations-new', {
     parent: 'reservations',
@@ -180,12 +174,12 @@ function($stateProvider, $urlRouterProvider){
   })
   ;
 
-  // Go to today's schedule by default
+  // Go to today's day by default
   $urlRouterProvider.otherwise(function($injector){
     var $state = $injector.get('$state');
     var localDatesSvc = $injector.get('localDates');
     var dateStr = localDatesSvc.today().asStr;
-    $state.go('schedule', {date: dateStr});
+    $state.go('day', {date: dateStr});
   });
 
 }]);
@@ -215,11 +209,18 @@ angular.module('saddle')
       function goHome(){
         event.preventDefault();
         var dateStr = localDates.today().asStr;
-        $state.go('schedule', {date: dateStr});
+        $state.go('day', {date: dateStr});
       }
 
-      // If the schedule state is called without a date, redirect to today's date
-      if ((toState.name === "schedule") && !toParams.date) {
+      // If the state is 'reservations' (and not one of its children)
+      // redirect to current date
+      if(toState.name === "reservations"){
+        goHome();
+      }
+
+
+      // If the day state is called without a date, redirect to today's date
+      if ((toState.name === "day") && !toParams.date) {
         goHome();
       }
 

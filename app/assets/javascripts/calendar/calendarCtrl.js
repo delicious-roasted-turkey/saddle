@@ -15,14 +15,20 @@ function($scope, $state, $stateParams, localDates, daysSvc, uiCalendarConfig){
     header: 'false',
     timeFormat: 'HH:mm',
     lang: 'ca',
+    height: 'auto',
 
     // Customizes the appearance of event elements
     eventRender: function(event, element){
-      element.find(".fc-time").before($("<span/>", {
+      var outing = event.outing;
+      var freePlacesSpan = $("<span/>", {
         "class": "fc-freeplaces",
-        text: event.outing.freePlaces
-      }));
-      element.toggleClass('confirmed', event.outing.confirmed);
+        text: outing.freePlaces
+      });
+      freePlacesSpan.toggleClass("text-danger", outing.freePlaces < 0);
+      freePlacesSpan.toggleClass("text-success", outing.freePlaces > 0);
+      element.find(".fc-time").before(freePlacesSpan);
+      element.toggleClass('confirmed', outing.confirmed);
+      element.addClass('saddle-outing-fc-event')
     },
 
     // Fetches events from backend
@@ -37,10 +43,10 @@ function($scope, $state, $stateParams, localDates, daysSvc, uiCalendarConfig){
 
     // Handles click on day by going to day view
     dayClick: function(date) {
-      $state.go('schedule', {date: date});
+      $state.go('day', {date: date});
     },
     eventClick: function(event) {
-      $state.go('schedule', {date: event.date});
+      $state.go('day', {date: event.date});
     },
 
     viewRender: function(view, element) {

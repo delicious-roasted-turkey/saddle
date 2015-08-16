@@ -17,15 +17,18 @@
       end
   %>
 
-  <div class="container-fluid">
+  <div id="sub-body">
 
-    <div class="row row-offcanvas row-offcanvas-left">
+    <div class="row no-gutters row-offcanvas row-offcanvas-left" ng-class="{'active': !menuHidden}">
 
       <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
 
         <ul class="nav nav-sidebar">
           <li ng-repeat="link in navbarLinks" ui-sref-active="active">
-            <a href="#" ui-sref="{{link.state}}">{{link.text}}</a>
+            <a href="#" ui-sref="{{link.state}}" ng-click="hideMenu()">
+              <span class="fa fa-fw {{link.iconClasses}}"></span>
+              {{link.text}}
+            </a>
           </li>
         </ul>
 
@@ -33,22 +36,23 @@
 
       <div class="col-sm-9 col-md-10 main">
 
-        <!--toggle sidebar button-->
-        <p class="visible-xs">
-          <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">
-            <i class="fa fa-chevron-left"></i>
-            <i class="fa fa-chevron-right"></i>
-          </button>
-        </p>
 
-        <div class="col-md-10 col-md-offset-1">
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <ui-view></ui-view>
+        <div class="row no-gutters">
+          <div class="col-md-10 col-md-offset-1">
+            <div id="saddle-main-view-panel" class="panel panel-default">
+              <div class="panel-body">
+
+                <div class="row visible-xs">
+                  <button type="button" class="btn btn-link" ng-click="toggleMenu()">
+                    <i class="fa fa-fw fa-bars"></i>Menú
+                  </button>
+                </div>
+
+                <ui-view></ui-view>
+              </div>
             </div>
           </div>
         </div>
-
 
       </div>
     </div>

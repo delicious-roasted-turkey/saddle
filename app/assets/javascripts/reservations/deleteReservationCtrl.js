@@ -13,7 +13,7 @@ function($scope, $state, outing, reservation, reservationsSvc){
   $scope.submit = function(){
     reservationsSvc.destroy(reservation.id)
       .finally(function(){
-        $state.go("schedule", {date: $scope.outing.day.date});
+        $state.go("day", {date: $scope.outing.day.date});
       })
   }
 

@@ -3,10 +3,12 @@ $saddle-back-bgcolor: #e0e0e0
 
 html,
 body,
-body > .container-fluid,
-body > .container-fluid > .row,
-body > .container-fluid > .row > #sidebar,
-body > .container-fluid > .row > .main
+body > #sub-body,
+body > #sub-body > .row,
+body > #sub-body > .row > #sidebar,
+body > #sub-body > .row > .main,
+body > #sub-body > .row > .main > .row,
+body > #sub-body > .row > .main > .row > div
   height: 100%
 
 
@@ -15,10 +17,26 @@ body
 
 .main
   background-color: transparent
+  overflow-y: auto
 
 #sidebar
-  box-shadow: 0 0px 5px rgba(0, 0, 0, 0.35)
   background-color: $saddle-front-bgcolor
+  z-index: 1 // So that box-shadow will appear over adjoining div
+  box-shadow: 0 0px 5px rgba(0, 0, 0, 0.35)
+  @media (max-width: 992px)
+    box-shadow: 0 0px 8px rgba(0, 0, 0, 0.35)
+  @media (max-width: 768px)
+    box-shadow: none
+
+#saddle-main-view-panel
+  margin-bottom: 20px
+  @media (max-width: 992px)
+    min-height: 100%
+    margin-bottom: 0px
+    border-radius: 0px
+
+  .panel-body
+    padding-top: 5px
 
 ////////////////
 // Form controls
@@ -37,24 +55,52 @@ form.form-inline input[type='number']
 
 // Horizontal bars should be visible
 hr
-  height: 1px
-  background-color: #ccc
+  border-color: #ccc
   margin-top: 20px
   margin-bottom: 20px
 
+// "Delete" buttons should be red when hovered
+.fa-trash:hover,
+button:not(:disabled):hover .fa-trash,
+a:hover .fa-trash
+  color: #c43f3a
 
 //////////////
-///Calendar
+/// Display of outings as fullCalendar events
 /////////////
 
-.fc-event
+.saddle-outing-fc-event
+  border-radius: 2px
+  background-color: white
+  color: black !important
+  border-color: lightgray
+
   .fc-title
     display: block
+  .fc-time
+    font-weight: normal
   .fc-freeplaces
+    font-weight: bold
     float: right
 
-.fc-event:not(.confirmed)
-  color: lightgray
+
+// Disable hover on the table that contains the events,
+// so that the pointer events can reach the table with
+// the days
+.fc-content-skeleton
+  pointer-events: none
+
+.fc-day
+  background-color: #e8e8e8
+  cursor: pointer
+.fc-day:hover
+  background-color: #ededed
+.fc-day-grid-event
+  margin-right: 20px
+
+.saddle-outing-fc-event:not(.confirmed)
+  opacity: 0.5
+  color: gray !important
 
 ////////////////
 // Miscellaneous
@@ -74,4 +120,18 @@ a
   .rwd-break
     display: none
 
+.btn-link:disabled
+  color: gray
 
+.btn-really-link
+  padding: 0px !important
+
+
+.row.no-gutters
+  margin-right: 0
+  margin-left: 0
+
+.row.no-gutters > [class^="col-"],
+.row.no-gutters > [class*=" col-"]
+  padding-right: 0
+  padding-left: 0

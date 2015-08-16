@@ -8,7 +8,7 @@
 <div class="clearfix" ng-repeat="horseCount in horseCounts">
   {{horseCount.numHorses}} disponibles a partir del {{horseCount.from | amDateFormat: 'LLL'}}
   <a class="btn btn-link pull-right" ng-click="deleteCount(horseCount.id)">
-    <span class="fa fa-fw fa-times"></span>
+    <span class="fa fa-fw fa-trash"></span>
   </a>
 </div>
 <hr class="hr"/>

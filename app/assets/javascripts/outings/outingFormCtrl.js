@@ -19,7 +19,7 @@ function($scope, $state, crudType, outing, outingsSvc){
     if($scope.outing_form.$valid) {
       saveAction($scope.outing)
       .then(function () {
-        $state.go("schedule", {date: $scope.outing.day.date});
+        $state.go("day", {date: $scope.outing.day.date});
       });
     }
   }
