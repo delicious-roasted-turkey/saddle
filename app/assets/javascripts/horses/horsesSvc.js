@@ -1,11 +1,12 @@
 angular.module('saddle')
 .factory('horsesSvc', [
 '$resource',
-function($resource){
+'dateUtils',
+function($resource, dateUtils){
 
   var resource = $resource('/available_horse_counts/:id.json', {}, {
-    currentCount: {
-      url: '/available_horse_counts/current_count.json',
+    countAt: {
+      url: '/available_horse_counts/count_at.json',
       method: 'GET'
     }
   });
@@ -15,7 +16,9 @@ function($resource){
   }
 
   function currentCount(){
-    return resource.currentCount().$promise;
+    return resource.countAt({
+      date: dateUtils.localTimeUTC()
+    }).$promise;
   }
 
   function destroy(id){

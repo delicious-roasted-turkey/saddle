@@ -1,8 +1,10 @@
 class AvailableHorseCountsController < ApplicationController
 
-  def current_count
+  def count_at
+    date = params.require :date
+    count = AvailableHorseCount.count_at_date date
     render json: {
-      :count => AvailableHorseCount.current_count
+      :count => count
     }
   end
 
