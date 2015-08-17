@@ -17,7 +17,9 @@ function($resource, dateUtils){
 
   function currentCount(){
     return resource.countAt({
-      date: dateUtils.localTimeUTC()
+      date: function(){
+        return dateUtils.localTimeUTC();
+      }
     }).$promise;
   }
 
