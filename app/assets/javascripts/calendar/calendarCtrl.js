@@ -43,10 +43,10 @@ function($scope, $state, $stateParams, localDates, daysSvc, uiCalendarConfig){
 
     // Handles click on day by going to day view
     dayClick: function(date) {
-      $state.go('day', {date: date});
+      $state.go('day', {date: date.toISOString()});
     },
     eventClick: function(event) {
-      $state.go('day', {date: event.date});
+      $state.go('day', {date: event.date.toISOString()});
     },
 
     viewRender: function(view, element) {
