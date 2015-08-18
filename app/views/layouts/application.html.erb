@@ -6,60 +6,15 @@
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
-<body ng-app="saddle"
-      ng-controller="RootCtrl"
-      class="<%=@must_render_navbar ? 'with-navbar' : ''%>"
->
 
+  <body class="<%=@must_render_navbar ? 'with-navbar' : ''%>">
 
-  <%= if @must_render_navbar
-        render "layouts/navbar"
-      end
-  %>
+    <%= if @must_render_navbar
+          render "layouts/navbar"
+        end
+    %>
+    <%= yield %>
 
-  <div id="sub-body">
-
-    <div class="row no-gutters row-offcanvas row-offcanvas-left" ng-class="{'active': !menuHidden}">
-
-      <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
-
-        <ul class="nav nav-sidebar">
-          <li ng-repeat="link in navbarLinks" ui-sref-active="active">
-            <a href="#" ui-sref="{{link.state}}" ng-click="hideMenu()">
-              <span class="fa fa-fw {{link.iconClasses}}"></span>
-              {{link.text}}
-            </a>
-          </li>
-        </ul>
-
-      </div>
-
-      <div class="col-sm-9 col-md-10 main">
-
-
-        <div class="row no-gutters">
-          <div class="col-md-10 col-md-offset-1">
-            <div id="saddle-main-view-panel" class="panel panel-default">
-              <div class="panel-body">
-
-                <div class="row visible-xs">
-                  <button type="button" class="btn btn-link" ng-click="toggleMenu()">
-                    <i class="fa fa-fw fa-bars"></i>Menú
-                  </button>
-                </div>
-
-                <ui-view></ui-view>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-</body>
-
-
+  </body>
 
 </html>

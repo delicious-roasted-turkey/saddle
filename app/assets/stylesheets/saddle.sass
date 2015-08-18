@@ -6,11 +6,8 @@ body,
 body > #sub-body,
 body > #sub-body > .row,
 body > #sub-body > .row > #sidebar,
-body > #sub-body > .row > .main,
-body > #sub-body > .row > .main > .row,
-body > #sub-body > .row > .main > .row > div
+body > #sub-body > .row > .main
   height: 100%
-
 
 body
   background-color: $saddle-back-bgcolor
@@ -27,6 +24,13 @@ body
     box-shadow: 0 0px 8px rgba(0, 0, 0, 0.35)
   @media (max-width: 768px)
     box-shadow: none
+
+.saddle-panel
+  height: 100%
+  > *
+    height: 100%
+  @media screen and (min-width: 992px)
+    margin-top: 20px
 
 #saddle-main-view-panel
   margin-bottom: 20px
@@ -64,6 +68,13 @@ hr
 button:not(:disabled):hover .fa-trash,
 a:hover .fa-trash
   color: #c43f3a
+
+.radio, .checkbox
+  label
+    padding-left: 5px // Bootstrap defaults to 20px, too much padding
+
+input[type="radio"], input[type="checkbox"]
+  margin-top: 2px
 
 //////////////
 /// Display of outings as fullCalendar events
@@ -115,6 +126,9 @@ a
 .line-height-0
   line-height: 0 !important
 
+.align-right
+  text-align: right
+
 // Responsive line break
 @media screen and (min-width: 768px)
   .rwd-break
@@ -135,3 +149,15 @@ a
 .row.no-gutters > [class*=" col-"]
   padding-right: 0
   padding-left: 0
+
+////////////////
+// Login page
+////////////////
+#login-form-container
+  margin-top: 10px
+  text-align: center
+  > form
+    display: inline-block
+    width: 100%
+    max-width: 300px
+    text-align: left

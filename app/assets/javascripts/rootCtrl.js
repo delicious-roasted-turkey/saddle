@@ -2,7 +2,8 @@ angular.module("saddle")
 .controller("RootCtrl", [
   "$scope",
   "$state",
-  function($scope, $state){
+  "sessionsSvc",
+  function($scope, $state, sessionsSvc){
 
     // Define links to be seen on navbar
     function NavbarLink(state, text, iconClasses){
@@ -13,7 +14,6 @@ angular.module("saddle")
 
     var navbarLinks = [
       new NavbarLink("reservations", "Reserves", "fa-book"),
-      //new NavbarLink("day", "Reserves"),
       new NavbarLink("horses", "Cavalls", "saddlefont-horseshoe"),
       new NavbarLink("defaultOutings", "Excursions predefinides", "saddlefont-directions")
     ];
@@ -24,6 +24,10 @@ angular.module("saddle")
     }
     $scope.hideMenu = function(){
       $scope.menuHidden = true;
+    }
+
+    $scope.signOut = function(){
+      sessionsSvc.signOutAndRedirectToLogin();
     }
 
     /**

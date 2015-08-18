@@ -3,9 +3,17 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  before_action do
+    I18n.locale = :ca
+  end
+
   after_filter :set_csrf_cookie_for_ng
 
-  protected
+  before_action do
+    if !devise_controller?
+      authenticate_user!
+    end
+  end
 
   # In Rails 4.2 and above
   def verified_request?

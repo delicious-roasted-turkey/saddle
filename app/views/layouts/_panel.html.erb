@@ -1,0 +1,14 @@
+<% cols ||= 10
+   offset = (12-cols)/2
+%>
+<div class="saddle-panel row no-gutters">
+  <div class="col-md-<%=cols%> col-md-offset-<%=offset%>">
+    <div id="saddle-main-view-panel" class="panel panel-default">
+      <div class="panel-body">
+
+    <%= yield %>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -30,6 +30,12 @@ gem 'sprockets', '2.12.3'
 
 gem 'angular-rails-templates'
 
+# Devise for authentication
+gem 'devise'
+gem 'devise-bootstrap-views'
+
+gem 'rails-i18n', '~> 4.0.0'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
