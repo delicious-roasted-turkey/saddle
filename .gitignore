@@ -20,3 +20,6 @@
 # specific settings)
 /.idea/workspace.xml
 
+
+# Ignore application configuration
+/config/application.yml

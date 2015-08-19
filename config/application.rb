@@ -27,6 +27,15 @@ module Saddle
     config.generators.helper = false
     config.generators.template_engine = false
 
+    config.action_mailer.smtp_settings = {
+      :address => ENV['mailer_address'],
+      :port => ENV['mailer_port'],
+      :user_name => ENV['mailer_user_name'],
+      :password => ENV['mailer_password'],
+      :authentication => 'plain',
+      :enable_starttls_auto => true
+    }
+
   end
 end
 
