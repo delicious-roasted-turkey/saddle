@@ -1,13 +1,16 @@
-<!--<div class="panel panel-default">-->
-  <!--<div class="panel-heading">-->
-    <!--<h4><%= t('.sign_in', :default => "Sign in") %></h4>-->
-  <!--</div>-->
-  <!--<div class="panel-body">-->
 
 <%= render :layout => '/layouts/panel', locals: {cols: 6} do %>
 
+
     <div id="login-form-container">
       <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { role: "form" }) do |f| %>
+
+      <% flash.each do |name, msg| -%>
+        <div class="form-group">
+          <%= content_tag :p, msg, class: (name == 'alert' ? 'text-danger' : '') %>
+        </div>
+      <% end -%>
+
         <div class="form-group">
           <%= f.email_field :email, autofocus: true, class: "form-control", placeholder: t('email') %>
         </div>
@@ -26,6 +29,5 @@
       <% end %>
     </div>
 <% end %>
-  <!--</div>-->
-<!--</div>-->
+
 <%= render "devise/shared/links" %>

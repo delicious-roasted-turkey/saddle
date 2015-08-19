@@ -17,7 +17,7 @@ angular.module('saddle')
       function signOutAndRedirectToLogin(){
         signOut()
           .then(function() {
-            window.location.href = "/";
+            window.location.href = "/users/sign_in";
           });
       }
 
