@@ -2,7 +2,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   respond_to :json
 
-  before_filter :return_forbidden
+  prepend_before_filter :return_forbidden
 
   private
 
