@@ -2,6 +2,11 @@ require 'rails_helper'
 
 RSpec.describe DefaultOutingsController, type: :controller do
 
+  before :each do
+    user = FactoryGirl.create :user
+    sign_in user
+  end
+
   describe 'index' do
 
     before :each do

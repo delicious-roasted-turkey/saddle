@@ -5,6 +5,11 @@ RSpec.describe DaysController, type: :controller do
 
   describe 'show' do
 
+    before :each do
+      user = FactoryGirl.create :user
+      sign_in user
+    end
+
     it 'should return a day that corresponds to the given date' do
       get 'show', date: '2123-02-23', format: :json
       expect(response).to be_success
