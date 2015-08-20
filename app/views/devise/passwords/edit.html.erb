@@ -1,24 +1,33 @@
-<%= bootstrap_devise_error_messages! %>
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h4><%= t('.change_your_password', :default => 'Change your password') %></h4>
-  </div>
-  <div class="panel-body">
+
+<%= render :layout => '/layouts/panel', locals: {cols: 6} do %>
+
+  <div id="login-form-container">
+
+    <% resource.errors.full_messages.each do |msg| -%>
+      <div class="form-group">
+        <%= content_tag :p, msg, class: 'text-danger' %>
+      </div>
+    <% end -%>
+
     <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put, role: "form" }) do |f| %>
       <%= f.hidden_field :reset_password_token %>
 
       <div class="form-group">
-        <%= f.label :password, t('.new_password', :default => 'New password') %>
-        <%= f.password_field :password, autofocus: true, class: "form-control"  %>
+        <%= f.password_field :password, autofocus: true, placeholder: t('devise.passwords.edit.new_password', :default => 'New password'), class: "form-control"  %>
       </div>
 
       <div class="form-group">
-        <%= f.label :password_confirmation, t('.confirm_new_password', :default => 'Confirm new password') %>
-        <%= f.password_field :password_confirmation, class: "form-control"  %>
+        <%= f.password_field :password_confirmation, class: "form-control", placeholder: t('devise.passwords.edit.confirm_new_password', :default => 'Confirm new password')  %>
       </div>
 
-      <%= f.submit t('.change_my_password', :default => 'Change my password'), class: "btn btn-primary" %>
+      <div class="form-group">
+        <%= f.submit t('devise.passwords.edit.change_my_password', :default => 'Change my password'), class: "btn btn-primary form-control" %>
+      </div>
+
+      <p class='align-right'>
+        <%= render 'devise/shared/links' %>
+      </p>
     <% end %>
+
   </div>
-</div>
-<%= render "devise/shared/links" %>
+<% end %>
