@@ -14,6 +14,14 @@
     </div>
   </div>
 
+  <%= bs_fg_begin 'resv-skill-level', 'Cobrada' %>
+    <div class="checkbox checkbox-inline">
+      <label>
+        <input ng-model="reservation.payed" type="checkbox"/>
+      </label>
+    </div>
+  <%= bs_fg_end %>
+
   <%= bs_fg_begin 'resv-num-adults', 'Adults', columns:(1..6) %>
     <input ng-model="reservation.numAdults" required class="form-control" type="number" id="resv-num-adults">
   <%= bs_fg_end columns:(1..6)%>
