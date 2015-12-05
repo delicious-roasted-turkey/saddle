@@ -53,8 +53,12 @@ class Outing < ActiveRecord::Base
 
   def num_available_horses
     date = day.date.clone
-    hours = Integer self[:time][0,2], 10
-    minutes = Integer self[:time][3,2], 10
+    Outing.num_available_horses date, self[:time]
+  end
+
+  def self.num_available_horses (date, time)
+    hours = Integer time[0,2], 10
+    minutes = Integer time[3,2], 10
     datetime = DateTime.new(date.year, date.month, date.day, hours, minutes)
     AvailableHorseCount.count_at_date datetime
   end

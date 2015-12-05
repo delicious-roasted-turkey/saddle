@@ -32,7 +32,7 @@ gem 'angular-rails-templates'
 
 # Devise for authentication
 gem 'devise'
-gem 'devise-bootstrap-views'
+gem 'devise-bootstrap-views', '~> 0.0.6'
 
 gem 'rails-i18n', '~> 4.0.0'
 

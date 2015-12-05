@@ -20,25 +20,35 @@ class Day < ActiveRecord::Base
   end
 
   def put_def_outings
-    if date < Date.today.at_beginning_of_day
-      # Date in the past. Must not return default outings
-    else
-      # Create default outings for this day by copying the data
-      # from the global default outings
-      existing_outings_def_out_ids = Set.new (outings.map { |o| o.default_outing_id })
-      dismissed_def_out_ids = Set.new (dismissed_default_outings.map {|ddo| ddo.id})
-      DefaultOuting.all.each do |def_out|
-        if existing_outings_def_out_ids.include? def_out.id
-          # There's already an outing that corresponds to this default
-          # outing
-        elsif dismissed_def_out_ids.include? def_out.id
-          # The default outing has been dismissed for this day
-        else
-          outings.new (Outing.by_default_outing_params def_out)
+    Day.put_def_outings [self]
+  end
+
+  def self.put_def_outings(days)
+
+    global_def_outs = DefaultOuting.all
+
+    days.each do |day|
+      if day.date < Date.today.at_beginning_of_day
+        # Date in the past. Must not return default outings
+      else
+        # Create default outings for this day by copying the data
+        # from the global default outings
+        existing_outings_def_out_ids = Set.new (day.outings.map { |o| o.default_outing_id })
+        dismissed_def_out_ids = Set.new (day.dismissed_default_outings.map {|ddo| ddo.id})
+        global_def_outs.each do |def_out|
+          if existing_outings_def_out_ids.include? def_out.id
+            # There's already an outing that corresponds to this default
+            # outing
+          elsif dismissed_def_out_ids.include? def_out.id
+            # The default outing has been dismissed for this day
+          else
+            day.outings.new (Outing.by_default_outing_params def_out)
+          end
         end
       end
     end
   end
+
 
   def dismiss_default_outing def_outing_id
     def_outing = DefaultOuting.find def_outing_id
@@ -66,11 +76,14 @@ class Day < ActiveRecord::Base
     present_dates = Set.new (days.map { |day| day.date })
     while pointer <= end_date
       if !present_dates.include? pointer
-        days << (new date: pointer.iso8601)
+        days << (new ({date: pointer.iso8601}))
       end
       pointer = pointer.next_day
     end
-    days.each { |day| day.put_def_outings }
+    Benchmark.bm(7) do |x|
+      x.report("put_def_outings: ") { Day.put_def_outings(days) }
+    end
+    # Day.put_def_outings days
     days
   end
 
