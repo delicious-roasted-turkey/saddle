@@ -1,5 +1,7 @@
 $saddle-front-bgcolor: #f0f0f0
 $saddle-back-bgcolor: #e0e0e0
+$saddle-secondary-text-color: #707070
+
 
 html,
 body,
@@ -114,6 +116,49 @@ input[type="radio"], input[type="checkbox"]
   color: gray !important
 
 ////////////////
+// Reservation list
+////////////////
+.saddle-rsv-row-comments, .rsv-comments-tooltip *
+  color: $saddle-secondary-text-color !important
+  text-align: left !important
+  font-style: italic
+
+.saddle-rsv-row-comments:not(.folded), .rsv-comments-tooltip *
+  white-space: pre-wrap !important
+
+.saddle-rsv-row-comments.folded
+  white-space: nowrap
+  text-overflow: ellipsis
+  overflow: hidden
+
+.saddle-rsv-row-comments
+  padding-left: 20px
+
+////////////////
+// Login page
+////////////////
+#login-form-container
+  margin-top: 10px
+  text-align: center
+  > form
+    display: inline-block
+    width: 100%
+    max-width: 300px
+    text-align: left
+
+
+////////////////
+// Bootstrap tooltip
+////////////////
+// More width, different colors, no arrow
+.tooltip-inner
+  color: #101010
+  background-color: #f0f0f0
+  max-width: 100%
+.tooltip-arrow
+  border-color: transparent !important
+
+////////////////
 // Miscellaneous
 ////////////////
 a
@@ -150,14 +195,3 @@ a
   padding-right: 0
   padding-left: 0
 
-////////////////
-// Login page
-////////////////
-#login-form-container
-  margin-top: 10px
-  text-align: center
-  > form
-    display: inline-block
-    width: 100%
-    max-width: 300px
-    text-align: left

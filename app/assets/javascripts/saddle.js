@@ -254,7 +254,7 @@ angular.module('saddle')
 
 
 angular.module('saddle')
-.run(['datepickerPopupConfig', 'timepickerConfig', function(dpc, tpc){
+.run(['uibDatepickerPopupConfig', 'uibTimepickerConfig', function(dpc, tpc){
   // Translate buttons of datepicker
   dpc.currentText = 'Avui';
   dpc.clearText = 'Netejar';
