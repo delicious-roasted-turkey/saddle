@@ -68,7 +68,8 @@
   <hr ng-repeat-start="reservation in outing.reservations" class="reservationSeparator"/>
   <div class="row reservation" ng-repeat-end>
     <div class="col-xs-6 col-sm-2">
-      <span class="fa fa-fw fa-users"></span> {{reservation.numAdults}} - {{reservation.numChildren}}
+      <span class="fa fa-fw fa-users"></span>
+      {{reservation.numAdults + reservation.numChildren}} - {{reservation.numChildren}}
     </div>
     <div class="col-xs-6 col-sm-2">
       {{reservation.skillLevel}}
