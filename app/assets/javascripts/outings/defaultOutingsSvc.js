@@ -4,7 +4,7 @@
     '$resource',
     function($resource){
 
-      var resource = $resource('/default_outings/:id');
+      var resource = $resource('/default_outings/:id.json');
 
       function getAll(){
         return resource.query().$promise;

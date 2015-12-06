@@ -3,7 +3,7 @@ class DefaultOutingsController < ApplicationController
   respond_to :json
 
   def index
-    render json: DefaultOuting.all
+    @default_outings = DefaultOuting.all
   end
 
   def create
@@ -20,7 +20,7 @@ class DefaultOutingsController < ApplicationController
 
   def show
     id = params.require(:id)
-    render json: DefaultOuting.find(id)
+    @default_outing = DefaultOuting.find(id)
   end
 
   private
