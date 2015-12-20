@@ -11,6 +11,11 @@ class DefaultOutingsController < ApplicationController
     render json: nil
   end
 
+  def update
+    DefaultOuting.find(params[:id]).update! model_params
+    render json: nil
+  end
+
   def destroy
     id = params.require(:id)
     model = DefaultOuting.find(id)
@@ -26,6 +31,6 @@ class DefaultOutingsController < ApplicationController
   private
 
   def model_params
-    params.require(:default_outing).permit(:time, :name)
+    params.require(:default_outing).permit(:time, :name, :price_adult, :price_child)
   end
 end

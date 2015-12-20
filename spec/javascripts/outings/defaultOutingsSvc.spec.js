@@ -16,4 +16,5 @@ describe("Default outings service", function(){
   it("responds to create()", function(){
     expect(typeof svc.create).toBe('function')
   });
+
 });

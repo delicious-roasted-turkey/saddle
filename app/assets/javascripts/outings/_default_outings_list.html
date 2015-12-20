@@ -13,8 +13,13 @@
       / {{outing.priceChild | currency : '€' : 2}}
     </div>
     <div class="adjust-to-content">
-      <a class="btn btn-link" ui-sref="defaultOutings-delete({id:{{outing.id}}})">
-        <span class="fa fa-fw fa-trash"></span>Eliminar
+      <a class="btn btn-link btn-really-link" ui-sref="defaultOutings-edit({id:{{outing.id}}})">
+        <span class="fa fa-fw fa-pencil"></span>
+      </a>
+    </div>
+    <div class="adjust-to-content">
+      <a class="btn btn-link btn-really-link" ui-sref="defaultOutings-delete({id:{{outing.id}}})">
+        <span class="fa fa-fw fa-trash"></span>
       </a>
     </div>
   </div>
