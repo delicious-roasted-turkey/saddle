@@ -2,15 +2,23 @@
 <form novalidate ng-submit="submit()" ng-class="{'atmp-submit': atmpSubmit}" class="form-horizontal" name="outing_form">
 
   <%= bs_fg_begin 'outing-new-date', 'Data' %>
-  <p class="form-control-static" id="outing-new-time">{{outing.day.date | saddleLongDate}}</p>
+    <p class="form-control-static" id="outing-new-time">{{outing.day.date | saddleLongDate}}</p>
   <%= bs_fg_end %>
 
   <%= bs_fg_begin 'outing-new-time', 'Hora' %>
-  <input ng-model="outing.time" class="form-control" type="text" id="outing-new-time" saddle-validate-time>
+    <input ng-model="outing.time" class="form-control" type="text" id="outing-new-time" saddle-validate-time>
   <%= bs_fg_end %>
 
   <%= bs_fg_begin 'outing-new-name', 'Nom' %>
-  <input ng-model="outing.name" class="form-control" type="text" id="outing-new-name">
+    <input ng-model="outing.name" class="form-control" type="text" id="outing-new-name">
+  <%= bs_fg_end %>
+
+  <%= bs_fg_begin 'outing-new-price-adult', 'Preu adult' %>
+    <input required ng-model="outing.priceAdult" saddle-validate-currency class="form-control" type="text" id="outing-new-price-adult">
+  <%= bs_fg_end %>
+
+  <%= bs_fg_begin 'outing-new-price-child', 'Preu nen' %>
+    <input required ng-model="outing.priceChild" saddle-validate-currency class="form-control" type="text" id="outing-new-price-child">
   <%= bs_fg_end %>
 
   <div class="form-group">

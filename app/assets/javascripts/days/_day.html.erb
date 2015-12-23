@@ -42,6 +42,10 @@
                        'text-success': outing.takenPlaces < outing.numAvailableHorses,
                        'text-muted': outing.takenPlaces == outing.numAvailableHorses}"
           > ({{outing.numAvailableHorses - outing.takenPlaces}}) </span>
+        <span>
+          {{outing.priceAdult | currency : '€' : 2}}
+          / {{outing.priceChild | currency : '€' : 2}}
+        </span>
         </p>
         <div class="pull-right">
           <div ng-show="outing.confirmed">
@@ -81,6 +85,12 @@
       <a href="tel:{{reservation.phone}}"><span class="fa fa-phone"></span></a>
       <a href="skype:{{reservation.phone}}"><span class="fa fa-skype"></span></a>
       <% end %>
+    </div>
+    <div class="col-xs-6 col-sm-3">
+      <span ng-if="(reservation.priceAdult != outing.priceAdult) || (reservation.priceChild != outing.priceChild)">
+        {{reservation.priceAdult | currency : '€' : 2}}
+        / {{reservation.priceChild | currency : '€' : 2}}
+      </span>
     </div>
     <div class="col-sm-2 text-right">
       <a role="button" ui-sref="reservations-edit({id: {{reservation.id}}})">

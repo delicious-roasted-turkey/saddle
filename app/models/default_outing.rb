@@ -1,3 +1,5 @@
+require 'money/money_field_callbacks'
+
 class DefaultOuting < ActiveRecord::Base
 
   acts_as_paranoid
@@ -5,16 +7,7 @@ class DefaultOuting < ActiveRecord::Base
   validates :name, presence: true
   validates :time, presence: true , local_time: true
 
-  before_save do
-    puts '#######################'
-    puts '#######################'
-    puts 'saving a default Outing'
-    puts self.class
-    puts self.price_adult.class
-    puts self.price_child.class
-    puts '#######################'
-    puts '#######################'
-  end
+  before_save MoneyFieldCallbacks.new([:price_adult, :price_child])
 
   # Outings are returned in ascending time by default
   default_scope { order(:time) }

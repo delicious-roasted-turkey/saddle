@@ -90,8 +90,8 @@ function($stateProvider, $urlRouterProvider){
     },
     resolve: {
       crudType: function () { return 'CREATE'; },
-      reservation: ['$stateParams', 'reservationsSvc', function($sp, svc){
-        return svc.getNew($sp.outingId)
+      reservation: ['$stateParams', 'reservationsSvc', 'outing', function($sp, svc, outing){
+        return svc.getNew(outing);
       }],
       outing: ['$stateParams', 'outingsSvc', function($sp, oSvc){
         return oSvc.get($sp.outingId);

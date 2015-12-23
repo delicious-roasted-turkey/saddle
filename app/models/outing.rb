@@ -7,6 +7,8 @@ class Outing < ActiveRecord::Base
   validates :time, presence: true , local_time: true
   validates :day, presence: true
 
+  before_save MoneyFieldCallbacks.new([:price_adult, :price_child])
+
   # Outings are returned in ascending time by default
   default_scope { order(:time) }
 
@@ -16,6 +18,8 @@ class Outing < ActiveRecord::Base
     {
       :name => def_out.name,
       :time => def_out.time,
+      :price_adult => def_out.price_adult,
+      :price_child => def_out.price_child,
       :default_outing_id => def_out.id
     }
   end
