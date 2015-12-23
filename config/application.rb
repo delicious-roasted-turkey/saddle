@@ -40,6 +40,9 @@ module Saddle
       host: ENV['host']
     }
 
+    # Use gzip compression
+    config.middleware.use Rack::Deflater
+
   end
 end
 
