@@ -9,8 +9,6 @@ class Day < ActiveRecord::Base
 
   validates :date, presence: true
 
-  private_class_method :new
-
   def self.by_date(date, options={})
     day = existing_or_new date
     if options[:put_def_outings]
@@ -80,10 +78,9 @@ class Day < ActiveRecord::Base
       end
       pointer = pointer.next_day
     end
-    Benchmark.bm(7) do |x|
-      x.report("put_def_outings: ") { Day.put_def_outings(days) }
-    end
-    # Day.put_def_outings days
+
+    Day.put_def_outings days
+
     days
   end
 

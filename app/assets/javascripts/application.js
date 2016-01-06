@@ -13,6 +13,7 @@
 //= require angular-ui-calendar
 //= require angular-bootstrap
 //= require angular-i18n/angular-locale_ca
+//= require big.js/big.min
 //
 //= require bootstrap-sass/assets/javascripts/bootstrap-sprockets
 //= require ./saddle.js

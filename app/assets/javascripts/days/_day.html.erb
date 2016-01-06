@@ -32,36 +32,48 @@
 
   <div class="row outing" ng-class="{'outing-confirmed': outing.confirmed}" ng-repeat-start="outing in day.outings | orderBy : 'time' ">
     <div class="col-sm-12">
-      <div class="outing-content clearfix">
-        <p class="h4 outing-text">
-          {{outing.time}} {{outing.name}}
-          -
-          {{outing.takenPlaces}}/{{outing.numAvailableHorses}}
-          <span
-            ng-class="{'text-danger': outing.takenPlaces > outing.numAvailableHorses,
-                       'text-success': outing.takenPlaces < outing.numAvailableHorses,
-                       'text-muted': outing.takenPlaces == outing.numAvailableHorses}"
-          > ({{outing.numAvailableHorses - outing.takenPlaces}}) </span>
-        <span>
-          {{outing.priceAdult | currency : '€' : 2}}
-          / {{outing.priceChild | currency : '€' : 2}}
-        </span>
-        </p>
-        <div class="pull-right">
-          <div ng-show="outing.confirmed">
-            <button class="btn-link btn-really-link" ui-sref="outings-edit({id:{{outing.id}}})"><span class="fa fa-fw fa-pencil"/></button>
-            <button class="btn-link btn-really-link" ui-sref="outings-delete({id:{{outing.id}}})" ng-disabled="outing.reservations.length">
-              <span class="fa fa-fw fa-trash"/>
-            </button>
-            <button class="btn btn-xs btn-primary" role="button" ui-sref="reservations-new({outingId: {{outing.id}}})">
-              <span class="fa fa-plus"></span> Reserva
-            </button>
+      <div class="outing-content view-table">
+        <div class="view-row">
+
+          <div>
+
+            <div class="h4 outing-text inline width-1-3 width-sm-1-2">
+              {{outing.time}} {{outing.name}}
+            </div><div class="h4 outing-text inline width-1-3 width-sm-1-2">
+
+              {{outing.takenPlaces}}/{{outing.numAvailableHorses}}
+              <span
+              ng-class="{'text-danger': outing.takenPlaces > outing.numAvailableHorses,
+                           'text-success': outing.takenPlaces < outing.numAvailableHorses,
+                           'text-muted': outing.takenPlaces == outing.numAvailableHorses}"
+              > ({{outing.numAvailableHorses - outing.takenPlaces}}) </span>
+
+            </div><div class="h4 outing-text inline width-1-3 width-sm-1-2">
+
+              <span>
+                {{outing.priceAdult | currency : '€' : 2}}
+                / {{outing.priceChild | currency : '€' : 2}}
+              </span>
+            </div>
           </div>
-          <div ng-show="!outing.confirmed">
-            <button class="btn btn-link btn-really-link" ng-show="!outing.confirmed" ng-click="confirmOuting(outing.defaultOutingId)"><span class="fa fa-fw fa-check"/></button>
-            <button class="btn btn-link btn-really-link" ng-click="dismissDefaultOuting(outing.defaultOutingId)">
-              <span class="fa fa-fw fa-trash"/>
-            </button>
+          <div class="text-nowrap adjust-to-content">
+            <div class="pull-right outing-btns">
+              <div ng-show="outing.confirmed">
+                <button class="btn-link btn-really-link" ui-sref="outings-edit({id:{{outing.id}}})"><span class="fa fa-fw fa-pencil"/></button>
+                <button class="btn-link btn-really-link" ui-sref="outings-delete({id:{{outing.id}}})" ng-disabled="outing.reservations.length">
+                  <span class="fa fa-fw fa-trash"/>
+                </button>
+                <button class="btn btn-xs btn-primary" role="button" ui-sref="reservations-new({outingId: {{outing.id}}})">
+                  <span class="fa fa-plus"></span> Reserva
+                </button>
+              </div>
+              <div ng-show="!outing.confirmed">
+                <button class="btn btn-link btn-really-link" ng-show="!outing.confirmed" ng-click="confirmOuting(outing.defaultOutingId)"><span class="fa fa-fw fa-check"/></button>
+                <button class="btn btn-link btn-really-link" ng-click="dismissDefaultOuting(outing.defaultOutingId)">
+                  <span class="fa fa-fw fa-trash"/>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -70,38 +82,51 @@
   </div>
 
   <hr ng-repeat-start="reservation in outing.reservations" class="reservationSeparator"/>
-  <div class="row reservation">
-    <div class="col-xs-6 col-sm-2">
-      <span class="fa fa-fw fa-users"></span>
-      {{reservation.numAdults + reservation.numChildren}} - {{reservation.numChildren}}
-    </div>
-    <div class="col-xs-6 col-sm-2">
-      {{reservation.skillLevel}}
-    </div>
-    <div class="col-xs-6 col-sm-3">{{reservation.name}}</div>
-    <div class="col-xs-6 col-sm-3">
-      {{reservation.phone}}
-      <% if false %>
-      <a href="tel:{{reservation.phone}}"><span class="fa fa-phone"></span></a>
-      <a href="skype:{{reservation.phone}}"><span class="fa fa-skype"></span></a>
-      <% end %>
-    </div>
-    <div class="col-xs-6 col-sm-3">
-      <span ng-if="(reservation.priceAdult != outing.priceAdult) || (reservation.priceChild != outing.priceChild)">
-        {{reservation.priceAdult | currency : '€' : 2}}
-        / {{reservation.priceChild | currency : '€' : 2}}
-      </span>
-    </div>
-    <div class="col-sm-2 text-right">
-      <a role="button" ui-sref="reservations-edit({id: {{reservation.id}}})">
-        <span class="fa fa-fw fa-pencil"></span>
-      </a>
-      <a role="button" ui-sref="reservations-delete({id: {{reservation.id}}})">
-        <span class="fa fa-fw fa-trash"></span>
-      </a>
 
+  <div class="row reservation">
+    <div class="col-xs-12">
+      <div class="view-table">
+        <div class="view-row">
+          <%-# Left part of row, with the data -%>
+          <div>
+            <div>
+              <div class="inline width-1-5 width-md-1-3">
+                <span class="fa fa-fw fa-users text-very-muted"></span>
+                {{reservation.numAdults + reservation.numChildren}} - {{reservation.numChildren}}
+              </div><div class="inline width-1-5 width-md-1-3">
+                {{reservation.skillLevel}}
+              </div><div class="inline width-1-5 width-md-1-3">
+                {{reservation.name}}
+              </div><div class="inline width-1-5 width-md-1-3">
+                {{reservation.phone}}
+                <% if false %>
+                    <a href="tel:{{reservation.phone}}"><span class="fa fa-phone"></span></a>
+                    <a href="skype:{{reservation.phone}}"><span class="fa fa-skype"></span></a>
+                <% end %>
+              </div><div class="inline width-1-5 width-md-1-3">
+                <span ng-if="(reservation.priceAdult != outing.priceAdult) || (reservation.priceChild != outing.priceChild)">
+                  {{reservation.priceAdult | currency : '€' : 2}}
+                  / {{reservation.priceChild | currency : '€' : 2}}
+                </span>
+              </div>
+            </div>
+
+          </div>
+          <%-# Right part: buttons to edit and delete -%>
+          <div class="adjust-to-content text-nowrap">
+            <a role="button" ui-sref="reservations-edit({id: {{reservation.id}}})">
+              <span class="fa fa-fw fa-pencil"></span>
+            </a>
+            <a role="button" ui-sref="reservations-delete({id: {{reservation.id}}})">
+              <span class="fa fa-fw fa-trash"></span>
+            </a>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
+
   <div class="row"
        ng-init="folded = true"
        ng-click="folded = !folded"

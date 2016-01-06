@@ -1,8 +1,7 @@
 angular.module('saddle')
 .factory('reservationsSvc', [
 '$resource',
-'outingsSvc',
-function($resource, outingsSvc){
+function($resource){
 
   var resource = $resource('/reservations/:id.json', {id:'@reservation.id'}, {
     update: { method: 'PUT' }
@@ -15,10 +14,6 @@ function($resource, outingsSvc){
     reservation.outingId = outing.id;
     reservation.priceAdult = outing.priceAdult;
     reservation.priceChild = outing.priceChild;
-    
-    console.log(outing.priceAdult);
-    console.log(outing.priceChild);
-
     reservation.numAdults = 0;
     reservation.numChildren = 0;
 
