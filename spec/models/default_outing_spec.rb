@@ -4,7 +4,7 @@ require 'spec_helper'
 RSpec.describe DefaultOuting, type: :model do
 
   describe 'attributes' do
-    it {should respond_to :name, :time}
+    it {should respond_to :name, :time, :price_adult, :price_child}
   end
 
   describe 'validation' do

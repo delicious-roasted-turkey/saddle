@@ -7,11 +7,16 @@ function($resource){
     update: { method: 'PUT' }
   });
 
-  function getNew(outingId){
+  function getNew(outing){
+
     var reservation = {};
+
+    reservation.outingId = outing.id;
+    reservation.priceAdult = outing.priceAdult;
+    reservation.priceChild = outing.priceChild;
     reservation.numAdults = 0;
     reservation.numChildren = 0;
-    reservation.outingId = outingId;
+
     return reservation;
   }
 

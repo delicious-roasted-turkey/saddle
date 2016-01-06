@@ -90,8 +90,8 @@ function($stateProvider, $urlRouterProvider){
     },
     resolve: {
       crudType: function () { return 'CREATE'; },
-      reservation: ['$stateParams', 'reservationsSvc', function($sp, svc){
-        return svc.getNew($sp.outingId)
+      reservation: ['$stateParams', 'reservationsSvc', 'outing', function($sp, svc, outing){
+        return svc.getNew(outing);
       }],
       outing: ['$stateParams', 'outingsSvc', function($sp, oSvc){
         return oSvc.get($sp.outingId);
@@ -145,8 +145,26 @@ function($stateProvider, $urlRouterProvider){
   .state('defaultOutings-new', {
     url: '/new',
     parent: 'defaultOutings',
-    controller: 'AddDefaultOutingCtrl',
-    templateUrl: 'outings/_default_outings_new.html'
+    controller: 'DefaultOutingFormCtrl',
+    templateUrl: 'outings/_default_outing_form.html',
+    resolve: {
+      crudType: function(){ return 'CREATE'; },
+      defaultOuting: ['defaultOutingsSvc', function(svc) {
+        return svc.getNew();
+      }]
+    }
+  })
+  .state('defaultOutings-edit', {
+    parent: 'defaultOutings',
+    url: '/:id/edit',
+    controller: 'DefaultOutingFormCtrl',
+    templateUrl: 'outings/_default_outing_form.html',
+    resolve: {
+      crudType: function(){ return 'EDIT'; },
+      defaultOuting: ['$stateParams', 'defaultOutingsSvc', function($sp, svc) {
+        return svc.get($sp.id);
+      }]
+    }
   })
   .state('defaultOutings-delete', {
     url: '/:id/delete',

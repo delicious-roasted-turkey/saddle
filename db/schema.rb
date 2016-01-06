@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150817225519) do
+ActiveRecord::Schema.define(version: 20151206164758) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,9 +36,11 @@ ActiveRecord::Schema.define(version: 20150817225519) do
   create_table "default_outings", force: :cascade do |t|
     t.string   "name"
     t.string   "time"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
     t.datetime "deleted_at"
+    t.decimal  "price_adult", precision: 16, scale: 2, default: 0.0
+    t.decimal  "price_child", precision: 16, scale: 2, default: 0.0
   end
 
   add_index "default_outings", ["deleted_at"], name: "index_default_outings_on_deleted_at", using: :btree
@@ -60,10 +62,12 @@ ActiveRecord::Schema.define(version: 20150817225519) do
   create_table "outings", force: :cascade do |t|
     t.string   "time"
     t.integer  "day_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                                               null: false
+    t.datetime "updated_at",                                               null: false
     t.string   "name"
     t.integer  "default_outing_id"
+    t.decimal  "price_adult",       precision: 16, scale: 2, default: 0.0
+    t.decimal  "price_child",       precision: 16, scale: 2, default: 0.0
   end
 
   add_index "outings", ["day_id"], name: "index_outings_on_day_id", using: :btree
@@ -77,8 +81,10 @@ ActiveRecord::Schema.define(version: 20150817225519) do
     t.string   "phone"
     t.text     "comments"
     t.integer  "outing_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
+    t.decimal  "price_adult",  precision: 16, scale: 2, default: 0.0
+    t.decimal  "price_child",  precision: 16, scale: 2, default: 0.0
   end
 
   add_index "reservations", ["outing_id"], name: "index_reservations_on_outing_id", using: :btree

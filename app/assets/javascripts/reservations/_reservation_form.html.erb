@@ -37,6 +37,15 @@
     <input ng-model="reservation.phone" class="form-control" type="text" id="resv-phone">
   <%= bs_fg_end %>
 
+  <%= bs_fg_begin 'resv-new-price-adult', 'Preu adult' %>
+    <input required ng-model="reservation.priceAdult" saddle-money-input class="form-control" type="text" id="resv-new-price-adult">
+  <%= bs_fg_end %>
+
+  <%= bs_fg_begin 'resv-new-price-child', 'Preu nen' %>
+    <input required ng-model="reservation.priceChild" saddle-money-input class="form-control" type="text" id="resv-new-price-child">
+  <%= bs_fg_end %>
+
+
   <%= bs_fg_begin 'resv-comments', 'Observacions' %>
     <textarea ng-model="reservation.comments" type="tel" class="form-control" id="resv-comments"></textarea>
   <%= bs_fg_end %>

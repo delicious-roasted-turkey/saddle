@@ -36,7 +36,7 @@ class OutingsController < ApplicationController
   end
 
   def model_params
-    params.require(:outing).permit(:time, :name)
+    params.require(:outing).permit(:time, :name, :price_adult, :price_child)
   end
 
 end

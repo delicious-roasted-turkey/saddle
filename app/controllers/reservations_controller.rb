@@ -30,6 +30,8 @@ class ReservationsController < ApplicationController
       :name,
       :phone,
       :comments,
+      :price_adult,
+      :price_child,
       :outing_id
     )
   end

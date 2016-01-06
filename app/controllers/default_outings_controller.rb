@@ -3,11 +3,16 @@ class DefaultOutingsController < ApplicationController
   respond_to :json
 
   def index
-    render json: DefaultOuting.all
+    @default_outings = DefaultOuting.all
   end
 
   def create
     DefaultOuting.create!(model_params)
+    render json: nil
+  end
+
+  def update
+    DefaultOuting.find(params[:id]).update! model_params
     render json: nil
   end
 
@@ -20,12 +25,12 @@ class DefaultOutingsController < ApplicationController
 
   def show
     id = params.require(:id)
-    render json: DefaultOuting.find(id)
+    @default_outing = DefaultOuting.find(id)
   end
 
   private
 
   def model_params
-    params.require(:default_outing).permit(:time, :name)
+    params.require(:default_outing).permit(:time, :name, :price_adult, :price_child)
   end
 end

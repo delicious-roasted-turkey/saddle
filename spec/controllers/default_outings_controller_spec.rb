@@ -71,7 +71,7 @@ RSpec.describe DefaultOutingsController, type: :controller do
 
     before :each do
       @defOut = DefaultOuting.create(name: 'An example', time: '09:00')
-      get 'show', {'id' => @defOut.id}
+      get 'show', {'id' => @defOut.id, 'format' => :json}
     end
 
     it 'should be successful' do

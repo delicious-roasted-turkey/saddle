@@ -9,6 +9,14 @@
     <input required ng-model="defaultOuting.name" class="form-control" type="text" id="defout-new-name">
   <%= bs_fg_end %>
 
+  <%= bs_fg_begin 'defout-new-price-adult', 'Preu adult' %>
+    <input required ng-model="defaultOuting.priceAdult" saddle-money-input class="form-control" type="text" id="defout-new-price-adult">
+  <%= bs_fg_end %>
+
+  <%= bs_fg_begin 'defout-new-price-child', 'Preu nen' %>
+    <input required ng-model="defaultOuting.priceChild" saddle-money-input class="form-control" type="text" id="defout-new-price-child">
+  <%= bs_fg_end %>
+
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10 text-right">
       <button type="button" ui-sref="defaultOutings-list" class="btn btn-default">Cancel·lar</button>
