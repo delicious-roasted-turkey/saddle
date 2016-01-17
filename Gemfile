@@ -68,3 +68,8 @@ end
 group :test do
   gem "accept_values_for"
 end
+
+group :production do
+  gem 'rails_12factor'
+end
+
