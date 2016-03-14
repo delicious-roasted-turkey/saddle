@@ -4,9 +4,11 @@ Rails.application.routes.draw do
     sessions: 'sessions',
     registrations: 'registrations'
   }
-  resources :reservations
   resources :outings
   resources :default_outings
+
+  get 'reservations/by_outings' => 'reservations#by_outings'
+  resources :reservations
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -24,6 +26,8 @@ Rails.application.routes.draw do
 
   get 'available_horse_counts/count_at' => 'available_horse_counts#count_at'
   resources :available_horse_counts
+
+  get 'backup_file/get_text/:date' => 'backup_file#get_text'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -1,10 +1,16 @@
 angular.module('saddle')
 .factory('reservationsSvc', [
 '$resource',
-function($resource){
+'reservationsBackupSvc',
+function($resource, reservationsBackupSvc){
 
   var resource = $resource('/reservations/:id.json', {id:'@reservation.id'}, {
-    update: { method: 'PUT' }
+    update: { method: 'PUT' },
+    getOfOutings : {
+      method: 'GET',
+      url: '/reservations/by_outings.json',
+      isArray : true
+    }
   });
 
   function getNew(outing){
@@ -22,16 +28,22 @@ function($resource){
 
   return {
     create: function(reservation){
-      return resource.save({ reservation: reservation }).$promise;
+      return resource.save({ reservation: reservation }).$promise
+            .then(reservationsBackupSvc.writeBackupFile);
     },
     update: function(reservation){
-      return resource.update({ reservation: reservation }).$promise;
+      return resource.update({ reservation: reservation }).$promise
+            .then(reservationsBackupSvc.writeBackupFile);
     },
     get: function(id){
       return resource.get({id: id}).$promise;
     },
+    getOfOutings: function(outingIds){
+      return resource.getOfOutings({"outing_ids" : JSON.stringify(outingIds)}).$promise;
+    },
     destroy: function(id){
-      return resource.delete({id: id}).$promise;
+      return resource.delete({id: id}).$promise
+            .then(reservationsBackupSvc.writeBackupFile);
     },
 
     getNew: getNew

@@ -2,16 +2,32 @@ class Day < ActiveRecord::Base
 
   has_many :outings, :autosave => false
 
+  # has_many :reservations, :through => :outings
+
   has_and_belongs_to_many :dismissed_default_outings,
                           :class_name => 'DefaultOuting',
                           :join_table => 'dismissed_default_outings',
-                          :readonly => true
+                          :readonly => true,
+                          :after_remove => :uncache,
+                          :after_add => :uncache
+
+  after_touch :uncache
 
   validates :date, presence: true
 
+  @@cache = Hash.new
+
+  def self.clear_full_cache
+    @@cache = Hash.new
+  end
+
+  def uncache obj=nil
+    @@cache.delete self.date
+  end
+
   def self.by_date(date, options={})
     day = existing_or_new date
-    if options[:put_def_outings]
+    if options[:with_def_outings]
       day.put_def_outings
     end
     day
@@ -66,22 +82,45 @@ class Day < ActiveRecord::Base
     end
   end
 
-  def self.range start_date_str, end_date_str
+  def self.cached_for_calendar start_date_str, end_date_str
     start_date = Date.parse start_date_str
     end_date = Date.parse end_date_str
-    days = Day.where(:date => start_date..end_date)
-    pointer = start_date
-    present_dates = Set.new (days.map { |day| day.date })
-    while pointer <= end_date
-      if !present_dates.include? pointer
-        days << (new ({date: pointer.iso8601}))
+    dates = (start_date..end_date).to_set
+    days_from_cache = []
+
+    # Get the days that we have in cache
+    dates.each do |date|
+      if @@cache.has_key? date
+        # days_from_cache << @@cache[date]
       end
-      pointer = pointer.next_day
     end
 
-    Day.put_def_outings days
+    # See which dates we still have to resolve, because they weren't cached
+    dates.subtract days_from_cache.map { |d| d.date}
 
-    days
+    # Obtain from the database whichever days are there
+    days_from_db = Day.includes({:outings => :reservations}, :dismissed_default_outings)
+              .where(:date => dates.to_a)
+
+    # See which days we still don't have. These will need to be created (but not
+    # persisted).
+    dates.subtract days_from_db.map { |d| d.date}
+    new_days = dates.collect { |d|
+        new ({date: d.iso8601})
+    }
+
+    not_cached_days = [days_from_db, new_days].flatten
+
+    Day.put_def_outings not_cached_days
+
+    not_cached_days.each do |d|
+      @@cache[d.date] = d
+    end
+
+    result = [days_from_cache, not_cached_days].flatten
+
+    result
+
   end
 
 end

@@ -1,3 +1,6 @@
+
+//alert(typeof module)
+
 angular.module('saddle', ['' +
   'ui.router',
   'templates',
@@ -282,4 +285,20 @@ angular.module('saddle')
   tpc.showMeridian = false;
 }]);
 
+angular.module('saddle')
+.run(['$interval', '$timeout', 'reservationsBackupSvc', function ($interval, $timeout, reservationsBackupSvc, fileSvc) {
 
+  var cnt = 0;
+  var int = $interval(function(){
+    reservationsBackupSvc.writeBackupFile();
+    //reservationsBackupSvc.getText();
+    cnt++;
+    if(cnt >= 3){
+      $interval.cancel(int);
+    }
+  }, 1000);
+
+
+  //$timeout(reservationsBackupSvc.writeBackupFile, 2000);
+
+}]);
