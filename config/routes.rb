@@ -27,7 +27,8 @@ Rails.application.routes.draw do
   get 'available_horse_counts/count_at' => 'available_horse_counts#count_at'
   resources :available_horse_counts
 
-  get 'backup_file/get_text/:date' => 'backup_file#get_text'
+  get 'backup_file/:date/get_json' => 'backup_file#get_json'
+  get 'backup_file/:date/get_text' => 'backup_file#get_text'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

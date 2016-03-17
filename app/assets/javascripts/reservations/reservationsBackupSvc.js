@@ -7,7 +7,7 @@ function($resource, electronSvc, localDates){
 
   var resource = $resource('/backup_file.json', {}, {
     getText : {
-      url: '/backup_file/get_text/:date.json',
+      url: '/backup_file/:date/get_json.json',
       method: 'GET'
     }
   });

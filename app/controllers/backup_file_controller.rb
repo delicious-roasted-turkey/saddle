@@ -1,7 +1,16 @@
 class BackupFileController < ApplicationController
 
   def get_text
-    puts  'action get_text has been called'
+    text = build_text
+    send_data text, :filename => 'reserves.txt'
+  end
+
+  def get_json
+    text = build_text
+    render json: {:text => text}
+  end
+
+  def build_text
 
     datestr = params.require :date
     date = Date.iso8601 datestr
@@ -21,7 +30,7 @@ class BackupFileController < ApplicationController
 
     sb.print_days days
 
-    render json: {:text => sb.get}
+    return sb.get
 
   end
 
@@ -44,7 +53,9 @@ class BackupFileController < ApplicationController
       end
 
       datestr = "#{I18n.localize day.date, :format => '%A'}, #{I18n.localize day.date, :format => :long}"
+      @sb.line '#' * datestr.length
       @sb.line datestr
+      @sb.line '#' * datestr.length
       @sb.line
       @sb.indent
       confirmed_outings.sort{ |a, b| a.time <=> b.time }
@@ -52,6 +63,7 @@ class BackupFileController < ApplicationController
         print_outing o
       }
       @sb.deindent
+      @sb.line
     end
 
     def print_outing (outing)
@@ -66,6 +78,7 @@ class BackupFileController < ApplicationController
       else
         @sb.line
         outing.reservations.each { |r| print_reservation r }
+        @sb.line
       end
       @sb.deindent
     end
@@ -92,8 +105,6 @@ class BackupFileController < ApplicationController
 
         @sb.deindent
       end
-
-      @sb.line
 
     end
 
