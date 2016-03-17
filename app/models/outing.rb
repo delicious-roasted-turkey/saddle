@@ -1,6 +1,8 @@
+require 'money/money_field_callbacks'
+
 class Outing < ActiveRecord::Base
 
-  belongs_to :day
+  belongs_to :day, touch: true
   has_many :reservations
   belongs_to :default_outing
 

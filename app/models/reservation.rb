@@ -11,4 +11,8 @@ class Reservation < ActiveRecord::Base
   # were created.
   default_scope { order(:created_at) }
 
+  def total_people
+    return num_adults + num_children
+  end
+
 end

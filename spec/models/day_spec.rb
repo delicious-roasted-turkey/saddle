@@ -41,7 +41,7 @@ RSpec.describe Day, type: :model do
     describe 'for days in the future' do
 
       before :each do
-        @day = Day.by_date 2.days.from_now, :put_def_outings => true
+        @day = Day.by_date 2.days.from_now, :with_def_outings => true
       end
 
       it 'returns default unconfirmed outings' do

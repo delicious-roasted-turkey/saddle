@@ -43,6 +43,10 @@ module Saddle
     # Use gzip compression
     config.middleware.use Rack::Deflater
 
+    # Use yajl for building JSON, because it is faster than ActiveSupport::JSON
+    # http://stackoverflow.com/questions/10983424/improving-rendering-performance-with-jbuilder-and-rails-3
+    MultiJson.use :yajl
+
   end
 end
 

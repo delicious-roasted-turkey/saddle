@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.2.4'
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
@@ -36,7 +38,6 @@ gem 'devise-bootstrap-views', '~> 0.0.6'
 
 gem 'rails-i18n', '~> 4.0.0'
 
-
 # Figaro lets us put sensitive configuration values in a yml file
 gem 'figaro'
 
@@ -49,9 +50,11 @@ gem 'figaro'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'yajl-ruby'
+
 group :development, :test do
-  # Call 'debugger' anywhere in the code to stop execution and get a debugger console
-  gem 'debugger'
+
+  gem 'byebug'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'

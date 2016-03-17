@@ -1,3 +1,6 @@
+
+//= require ./renameElectronSymbols.js
+
 //  (jQuery is required by bootsrap and fullacalendar)
 //= require jquery
 

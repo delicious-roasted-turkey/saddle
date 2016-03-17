@@ -1,5 +1,8 @@
 angular.module('saddle')
-.factory('outingsSvc', ['$resource', function($resource){
+.factory('outingsSvc', [
+'$resource',
+'reservationsBackupSvc',
+function($resource, reservationsBackupSvc){
 
   var resource = $resource('/outings/:id.json', {id:'@outing.id'}, {
     update: { method: 'PUT' },
@@ -22,6 +25,7 @@ angular.module('saddle')
 
   function confirmOuting(date, defaultOutingId){
     return resource.confirm({ date:date, defaultOutingId: defaultOutingId }).$promise
+          .then(reservationsBackupSvc.writeBackupFile);
   }
 
   function dismissDefault(date, defaultOutingId){
@@ -30,16 +34,19 @@ angular.module('saddle')
 
   return {
     create: function(outing){
-      return resource.save({ outing: outing }).$promise;
+      return resource.save({ outing: outing }).$promise
+            .then(reservationsBackupSvc.writeBackupFile);
     },
     update: function(outing){
-      return resource.update({ outing: outing }).$promise;
+      return resource.update({ outing: outing }).$promise
+            .then(reservationsBackupSvc.writeBackupFile);
     },
     get: function(id){
       return resource.get({id: id}).$promise;
     },
     destroy: function(id){
-      return resource.delete({id: id}).$promise;
+      return resource.delete({id: id}).$promise
+            .then(reservationsBackupSvc.writeBackupFile);
     },
 
     getNew: getNew,

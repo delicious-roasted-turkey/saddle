@@ -13,6 +13,8 @@ function($scope, $stateParams, $state, localDates, outingsSvc, day){
   $scope.localDate = localDate;
   $scope.day = day;
 
+  $scope.today = localDates.today()
+
   $scope.nextDay = function(){
     $state.go('day', {date: localDate.nextDay().asStr});
   };

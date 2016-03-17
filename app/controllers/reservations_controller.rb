@@ -19,6 +19,12 @@ class ReservationsController < ApplicationController
     render json: nil
   end
 
+  def by_outings
+    outing_ids = JSON.parse params[:outing_ids]
+    @reservations = Reservation.where(:outing_id => outing_ids)
+    render 'reservations/list'
+  end
+
   private
 
   def model_params
