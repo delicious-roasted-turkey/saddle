@@ -24,7 +24,7 @@ function($resource, electronSvc, localDates){
       var header = "Fitxer generat a " + new Date().toLocaleString('ca') + os.EOL + os.EOL;
       text = header + text;
 
-      fs.writeFile("saddle-reservations-backup", text);
+      fs.writeFile("reserves_auto.txt", text);
     });
   }
 
