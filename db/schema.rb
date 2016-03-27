@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160326221733) do
+ActiveRecord::Schema.define(version: 20160327223801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 20160326221733) do
     t.decimal  "price_adult",       precision: 16, scale: 2, default: 0.0
     t.decimal  "price_child",       precision: 16, scale: 2, default: 0.0
     t.text     "comments"
+    t.integer  "num_horses"
   end
 
   add_index "outings", ["day_id"], name: "index_outings_on_day_id", using: :btree

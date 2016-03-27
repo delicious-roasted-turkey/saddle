@@ -58,8 +58,19 @@ class Outing < ActiveRecord::Base
   end
 
   def num_available_horses
+    # The outing can have the number of horses specified in itself.
+    # If it hasn't, the total number of available horses at that
+    # date is taken
+    if !self.num_horses.nil? then
+      return self.num_horses
+    else
+      return self.num_available_horses_at_date
+    end
+  end
+
+  def num_available_horses_at_date
     date = day.date.clone
-    Outing.num_available_horses date, self[:time]
+    return Outing.num_available_horses date, self[:time]
   end
 
   def self.num_available_horses (date, time)
