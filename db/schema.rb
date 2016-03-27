@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151206164758) do
+ActiveRecord::Schema.define(version: 20160327223801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20151206164758) do
     t.date     "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text     "comments"
   end
 
   add_index "days", ["date"], name: "index_days_on_date", unique: true, using: :btree
@@ -68,6 +69,8 @@ ActiveRecord::Schema.define(version: 20151206164758) do
     t.integer  "default_outing_id"
     t.decimal  "price_adult",       precision: 16, scale: 2, default: 0.0
     t.decimal  "price_child",       precision: 16, scale: 2, default: 0.0
+    t.text     "comments"
+    t.integer  "num_horses"
   end
 
   add_index "outings", ["day_id"], name: "index_outings_on_day_id", using: :btree

@@ -13,6 +13,10 @@
     <input ng-model="outing.name" class="form-control" type="text" id="outing-new-name">
   <%= bs_fg_end %>
 
+  <%= bs_fg_begin 'outing-new-num-horses', 'Cavalls' %>
+  <input placeholder="{{outing.numAvailableHorsesAtDate}}" ng-model="outing.numHorses" class="form-control" type="number" id="outing-new-num-horses">
+  <%= bs_fg_end %>
+
   <%= bs_fg_begin 'outing-new-price-adult', 'Preu adult' %>
     <input required ng-model="outing.priceAdult" saddle-money-input class="form-control" type="text" id="outing-new-price-adult">
   <%= bs_fg_end %>
