@@ -24,11 +24,9 @@ function($scope, $stateParams, $state, localDates, outingsSvc, daysSvc, day){
   };
 
   $scope.confirmComments = function(){
-    console.log("editedComments:")
-    console.log($scope.editedComments)
     day.comments = $scope.editedComments;
-    daysSvc.update(day);
-    $scope.editingComments = false;
+    daysSvc.update(day)
+    .then($state.reload);
   };
 
   $scope.cancelComments = function(){
