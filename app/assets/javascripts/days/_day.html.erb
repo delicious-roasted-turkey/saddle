@@ -23,12 +23,35 @@
   </div>
 </div>
 
-<div class="row clearfix">
-  <div class="col-xs-12">
-    <a ui-sref="outings-new({date:'{{localDate.asStr}}'})" class="btn btn-primary btn-sm pull-right">
+<div class="row row-vert-align-bottom">
+
+  <%# Day comments %>
+  <div class="col-xs-12 col-sm-10">
+    <div ng-show="!editingComments" ng-click="editComments()">
+      <div ng-show="day.comments" class="with-editable-hint">
+        <span class="saddle-day-comments">{{day.comments}}</span>
+        <span class="editable-hint fa fa-pencil text-muted"></span>
+      </div>
+      <button class="btn btn-link" ng-show="!day.comments">
+        <span class="fa fa-sticky-note-o fa-fw"></span> Notes
+      </button>
+    </div>
+    <div ng-show="editingComments">
+      <textarea ng-model="editedComments" class="form-control bottom-5" rows="5"></textarea>
+      <div class="align-right">
+        <button type="button" ng-click="cancelComments()" class="btn btn-sm btn-default">Cancel·lar</button>
+        <button type="submit" ng-click="confirmComments()" class="btn btn-sm btn-primary">Acceptar</button>
+      </div>
+    </div>
+  </div>
+
+  <%# New outing %>
+  <div class="col-xs-12 col-sm-2 align-right top-5">
+    <a ui-sref="outings-new({date:'{{localDate.asStr}}'})" class="btn btn-primary btn-sm">
       <span class="fa fa-fw fa-plus"></span>Excursió
     </a>
   </div>
+
 </div>
 
 <div class="day-reservation-list">
@@ -79,6 +102,7 @@
             </div>
           </div>
         </div>
+        <div class="saddle-outing-comments" ng-bind="outing.comments"></div>
       </div>
     </div>
 

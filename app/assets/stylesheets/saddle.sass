@@ -2,6 +2,9 @@ $saddle-front-bgcolor: #f0f0f0
 $saddle-back-bgcolor: #e0e0e0
 $saddle-secondary-text-color: #707070
 
+// Should be equal to Bootstrap's font-size-base. I've not found a better way.
+$saddle-font-size-base: 14px
+
 
 html,
 body,
@@ -119,6 +122,10 @@ input[type="radio"], input[type="checkbox"]
 ////////////////
 // Reservation list
 ////////////////
+
+.saddle-outing-comments, .saddle-day-comments
+  white-space: pre-wrap
+
 .saddle-rsv-row-comments, .rsv-comments-tooltip *
   color: $saddle-secondary-text-color !important
   text-align: left !important
@@ -159,6 +166,35 @@ input[type="radio"], input[type="checkbox"]
 .tooltip-arrow
   border-color: transparent !important
 
+
+/////////////////////////////////////////////////////////////////////////
+// "Editable" hint (icon that appears when hovering over editable content)
+/////////////////////////////////////////////////////////////////////////
+.with-editable-hint:not(:hover) .editable-hint
+  opacity: 0
+.editable-hint
+  transition-property: opacity
+  transition-duration: 300ms
+
+//////////////////////////////////app/assets/stylesheets/saddle.sass:166
+// Bottom-align content of columns
+// (http://stackoverflow.com/a/14223553/2626593)
+//////////////////////////////////
+
+.row-vert-align-bottom
+  font-size: 0
+
+.row-vert-align-bottom > *
+  float: none
+  display: inline-block
+  font-size: $saddle-font-size-base
+
+.row-vert-align-bottom > *:last-child
+  vertical-align: bottom
+
+.row-vert-align-bottom p:last-child
+  margin-bottom: 0 /* optional */
+
 ////////////////
 // Miscellaneous
 ////////////////
@@ -174,6 +210,15 @@ a
 
 .align-right
   text-align: right
+
+.top-5
+  margin-top: 5px
+.top-10
+  margin-top: 10px
+.bottom-5
+  margin-bottom: 5px
+.bottom-10
+  margin-bottom: 10px
 
 // Responsive line break
 @media screen and (min-width: 768px)

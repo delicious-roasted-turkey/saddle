@@ -4,9 +4,11 @@
 angular.module("saddle")
 .factory("daysSvc", [
   "$resource",
-  function days($resource){
+  "reservationsBackupSvc",
+  function days($resource, reservationsBackupSvc){
 
-    var resource = $resource('/days/:date.json', {}, {
+    var resource = $resource('/days/:date.json', {date:'@day.date'}, {
+      update: { method: 'PUT' },
       range: {
         url: '/days/range.json',
         method: 'GET',
@@ -29,9 +31,15 @@ angular.module("saddle")
       return resource.range({start: start, end: end}).$promise;
     }
 
+    function update(day){
+      return resource.update({ day: day }).$promise
+        .then(reservationsBackupSvc.writeBackupFile);
+    }
+
     return {
       byDate: byDate,
-      range: range
+      range: range,
+      update: update
     }
   }
 ]);

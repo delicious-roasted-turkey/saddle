@@ -15,6 +15,15 @@ class DaysController < ApplicationController
     # @days = Day.includes({:outings => :reservations}, :dismissed_default_outings).range start_str, end_str
   end
 
+  def update
+    Day.by_date(params[:date]).update! model_params
+    render json: nil
+  end
+
+  def model_params
+    params.require(:day).permit(:date, :comments)
+  end
+
   private
 
   def bmarked_range

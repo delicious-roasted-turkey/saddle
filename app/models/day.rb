@@ -63,13 +63,16 @@ class Day < ActiveRecord::Base
     end
   end
 
-
   def dismiss_default_outing def_outing_id
     def_outing = DefaultOuting.find def_outing_id
     dismissed_default_outings << def_outing
     save! if !persisted?
     outings.reload
     put_def_outings
+  end
+
+  def confirmed_outings
+    return outings.select { |o| o.confirmed?}
   end
 
   private

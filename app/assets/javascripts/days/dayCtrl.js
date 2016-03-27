@@ -5,8 +5,9 @@ angular.module('saddle')
 '$state',
 'localDates',
 'outingsSvc',
+'daysSvc',
 'day',
-function($scope, $stateParams, $state, localDates, outingsSvc, day){
+function($scope, $stateParams, $state, localDates, outingsSvc, daysSvc, day){
 
   var localDate = localDates.fromIso8601(day.date);
 
@@ -14,6 +15,25 @@ function($scope, $stateParams, $state, localDates, outingsSvc, day){
   $scope.day = day;
 
   $scope.today = localDates.today()
+
+  $scope.editingComments = false;
+
+  $scope.editComments = function(){
+    $scope.editedComments = day.comments;
+    $scope.editingComments = true;
+  };
+
+  $scope.confirmComments = function(){
+    console.log("editedComments:")
+    console.log($scope.editedComments)
+    day.comments = $scope.editedComments;
+    daysSvc.update(day);
+    $scope.editingComments = false;
+  };
+
+  $scope.cancelComments = function(){
+    $scope.editingComments = false;
+  }
 
   $scope.nextDay = function(){
     $state.go('day', {date: localDate.nextDay().asStr});

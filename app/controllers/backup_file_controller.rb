@@ -46,8 +46,8 @@ class BackupFileController < ApplicationController
     end
 
     def print_day (day)
-      confirmed_outings = day.outings.select { |o| o.confirmed?}
-      if confirmed_outings.empty?
+
+      if !has_data day
         # Nothing to print
         return
       end
@@ -56,9 +56,10 @@ class BackupFileController < ApplicationController
       @sb.line '#' * datestr.length
       @sb.line datestr
       @sb.line '#' * datestr.length
+      print_comments day
       @sb.line
       @sb.indent
-      confirmed_outings.sort{ |a, b| a.time <=> b.time }
+      day.confirmed_outings.sort{ |a, b| a.time <=> b.time }
       .each { |o|
         print_outing o
       }
@@ -66,11 +67,16 @@ class BackupFileController < ApplicationController
       @sb.line
     end
 
+    def has_data day
+      return (!day.confirmed_outings.empty? || (day.comments && !day.comments.empty?))
+    end
+
     def print_outing (outing)
 
       @sb.line "#{outing.time} #{outing.name}"\
                 " - #{outing.free_places}/#{outing.num_available_horses}"\
                 " - #{price_string outing}"
+      print_comments outing
       @sb.indent
       if outing.reservations.empty?
         @sb.line '(Sense reserves)'
@@ -95,21 +101,27 @@ class BackupFileController < ApplicationController
 
       @sb.line mainstr
 
-      comments = r.comments || ''
-      if !comments.strip.empty?
-        @sb.indent
-
-        comment_lines = comments.lines.map &:chomp
-        comment_lines[0] = "obs.: #{comment_lines[0]}"
-        @sb.line comment_lines
-
-        @sb.deindent
-      end
+      print_comments r
 
     end
 
     def price_string (thing_with_prices)
       return "#{thing_with_prices.price_adult} € / #{thing_with_prices.price_child} €"
+    end
+
+    def print_comments thing_with_comments
+      comments = thing_with_comments.comments || ''
+      if !comments.strip.empty?
+        @sb.indent
+
+        comment_lines = comments.lines.map &:chomp
+        comment_lines = comment_lines.map { |cl|
+          '* ' + cl
+        }
+        @sb.line comment_lines
+
+        @sb.deindent
+      end
     end
 
     def get

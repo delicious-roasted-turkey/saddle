@@ -17,9 +17,10 @@ Rails.application.routes.draw do
   root 'home#index'
 
   #Days are referenced by date
-  resources :days, :except => :show
+  resources :days, :except => [:show, :update]
   get 'days/range' => 'days#range'
   get 'days/:date' => 'days#show'
+  put 'days/:date' => 'days#update'
 
   post 'outings/confirm' => 'outings#confirm'
   post 'outings/dismiss_default' => 'outings#dismiss_default'
