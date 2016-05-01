@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160327223801) do
+ActiveRecord::Schema.define(version: 20160501142644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,8 @@ ActiveRecord::Schema.define(version: 20160327223801) do
     t.datetime "deleted_at"
     t.decimal  "price_adult", precision: 16, scale: 2, default: 0.0
     t.decimal  "price_child", precision: 16, scale: 2, default: 0.0
+    t.date     "from"
+    t.date     "to"
   end
 
   add_index "default_outings", ["deleted_at"], name: "index_default_outings_on_deleted_at", using: :btree

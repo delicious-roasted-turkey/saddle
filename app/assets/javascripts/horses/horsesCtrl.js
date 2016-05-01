@@ -29,7 +29,7 @@ angular.module('saddle')
     }
 
     $scope.openDatePopup = function() {
-        $scope.popupStatus.opened = true;
+        $scope.datePopupIsOpen = true;
     };
 
     $scope.dateOptionSelected = function() {
@@ -41,9 +41,7 @@ angular.module('saddle')
       startingDay: 1
     };
 
-    $scope.popupStatus = {
-      opened: false
-    };
+    $scope.datePopupIsOpen = false;
 
     $scope.submit = function(){
       var count = {};
@@ -67,26 +65,6 @@ angular.module('saddle')
         .then(function(){
           $state.reload()
         });
-    }
-
-    function getDateFromFrom(){
-      var date;
-      if($scope.formVals.newCountFrom === "date"){
-        // User-defined date
-        date = new Date(
-          $scope.formVals.date.getFullYear(),
-          $scope.formVals.date.getMonth(),
-          $scope.formVals.date.getDate(),
-          $scope.formVals.time.getHours(),
-          $scope.formVals.time.getMinutes(),
-          $scope.formVals.time.getSeconds()
-        );
-        date = dateUtils.localTimeUTC(date);
-      } else {
-        // Current date
-        date = dateUtils.localTimeUTC();
-      }
-      return date;
     }
 
     $scope.deleteCount = function(id){

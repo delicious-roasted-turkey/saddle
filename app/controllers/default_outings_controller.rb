@@ -31,6 +31,6 @@ class DefaultOutingsController < ApplicationController
   private
 
   def model_params
-    params.require(:default_outing).permit(:time, :name, :price_adult, :price_child)
+    params.require(:default_outing).permit(:time, :name, :price_adult, :price_child, :from, :to)
   end
 end

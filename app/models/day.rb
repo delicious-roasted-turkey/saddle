@@ -55,7 +55,7 @@ class Day < ActiveRecord::Base
             # outing
           elsif dismissed_def_out_ids.include? def_out.id
             # The default outing has been dismissed for this day
-          else
+          elsif def_out.range_contains day.date
             day.outings.new (Outing.by_default_outing_params def_out)
           end
         end

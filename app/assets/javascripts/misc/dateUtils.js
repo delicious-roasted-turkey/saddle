@@ -23,7 +23,30 @@ angular.module('saddle')
       return result;
     }
 
+    function isoDate(date) {
+
+      console.log(date)
+
+      if(moment.isMoment(date)){
+        date = date.toDate();
+      }
+
+      function pad(number) {
+        var r = String(number);
+        if (r.length === 1) {
+          r = '0' + r;
+        }
+        return r;
+      }
+
+      return date.getUTCFullYear()
+        + '-' + pad(date.getUTCMonth() + 1)
+        + '-' + pad(date.getUTCDate());
+
+    }
+
     return {
-      localTimeUTC: localTimeUTC
+      localTimeUTC: localTimeUTC,
+      isoDate : isoDate
     }
   })

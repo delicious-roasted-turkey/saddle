@@ -20,5 +20,14 @@ class DefaultOuting < ActiveRecord::Base
     Day.clear_full_cache
   end
 
+  # Receives a date (local date) and returns whether the date range
+  # in wich this default outing is defined contains the given date.
+  def range_contains (date)
+    return (
+      (self.from.nil? or (self.from <= date)) and
+      (self.to.nil? or (self.to >= date))
+    )
+  end
+
 end
 

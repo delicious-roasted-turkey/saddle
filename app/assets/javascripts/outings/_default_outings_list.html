@@ -4,13 +4,31 @@
   </a>
 </div>
 <div class="view-table">
+  <div class="view-thead">
+    <div class="view-row">
+      <div>Hora</div>
+      <div>Nom</div>
+      <div>Preus</div>
+      <div>Des de</div>
+      <div>Fins a</div>
+    </div>
+  </div>
   <div class="view-row" ng-repeat="outing in defaultOutings">
     <div>
-      {{outing.time}} {{outing.name}}
+      {{outing.time}}
+    </div>
+    <div>
+      {{outing.name}}
     </div>
     <div>
       {{outing.priceAdult | currency : '€' : 2}}
       / {{outing.priceChild | currency : '€' : 2}}
+    </div>
+    <div>
+      {{(outing.from ? (outing.from | amDateFormat:'ll') : 'Sempre')}}
+    </div>
+    <div>
+      {{(outing.to ? (outing.to | amDateFormat:'ll') : 'Sempre')}}
     </div>
     <div class="adjust-to-content">
       <a class="btn btn-link btn-really-link" ui-sref="defaultOutings-edit({id:{{outing.id}}})">

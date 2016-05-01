@@ -33,7 +33,7 @@
   </div>
   <div ng-hide="!dateOptionSelected()">
     <span class="input-group valign-middle inline">
-      <input type="text" class="form-control" uib-datepicker-popup="dd MMMM yyyy" ng-model="formVals.date" is-open="popupStatus.opened" datepicker-options="dateOptions"/>
+      <input type="text" class="form-control" uib-datepicker-popup="dd MMMM yyyy" ng-model="formVals.date" is-open="datePopupIsOpen" datepicker-options="dateOptions"/>
       <span class="input-group-btn">
         <button type="button" class="btn btn-default" ng-click="openDatePopup()"><i class="glyphicon glyphicon-calendar"></i></button>
       </span>
