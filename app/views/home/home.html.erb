@@ -1,16 +1,22 @@
-<div id="sub-body" ng-app="saddle" ng-controller="RootCtrl">
+<div id="sub-body" ng-app="saddle" ng-controller="HomeCtrl">
 
   <div class="row no-gutters row-offcanvas row-offcanvas-left" ng-class="{'active': !menuHidden}">
 
     <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
 
       <ul class="nav nav-sidebar">
+
         <li ng-repeat="link in navbarLinks" ui-sref-active="active">
-          <a href="#" ui-sref="{{link.state}}" ng-click="hideMenu()">
+          <button class="btn btn-link"
+             ui-sref="{{link.state}}"
+             ng-click="hideMenu()"
+             ng-disabled="(rsvMove.moving && !link.enabledWhenMovingRsv)"
+          >
             <span class="fa fa-fw {{link.iconClasses}}"></span>
             {{link.text}}
-          </a>
+          </button>
         </li>
+
         <hr class="menu-item-divider"/>
         <li>
           <a href="javascript:void(0)" ng-click="signOut()">
@@ -25,10 +31,33 @@
     <div class="col-sm-9 col-md-10 main">
 
       <%= render :layout => '/layouts/panel' do %>
+
         <div class="row visible-xs">
           <button type="button" class="btn btn-link" ng-click="toggleMenu()">
             <i class="fa fa-fw fa-bars"></i>Menú
           </button>
+        </div>
+
+        <%# Panel for info about reservation being moved (to another day/outing) %>
+        <div class="row" ng-if="rsvMove.moving">
+          <div class="col-xs-12">
+
+            <div id="saddle-moving-rsv-info" style="display:flex; justify-content:space-between;">
+              <div>
+                <span class="fa fa-fw fa-lg saddlefont-reschedule"></span>
+                Movent reserva:
+                {{rsvMove.rsv.name}},
+                {{rsvMove.rsv.numAdults + rsvMove.rsv.numChildren}} persones
+              </div>
+
+              <%# Button for cancelling movement %>
+              <button class="btn btn-link btn-really-link" ng-click="rsvMove.cancel()">
+                <i class="fa fa-fw fa-2x saddlefont-cross"></i>
+              </button>
+            </div>
+
+
+          </div>
         </div>
 
         <ui-view></ui-view>

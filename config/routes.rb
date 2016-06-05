@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :default_outings
 
   get 'reservations/by_outings' => 'reservations#by_outings'
+  put 'reservations/move_to_outing' => 'reservations#move_to_outing'
   resources :reservations
 
   # The priority is based upon order of creation: first created -> highest priority.

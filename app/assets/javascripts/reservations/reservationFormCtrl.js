@@ -1,12 +1,13 @@
 angular.module("saddle")
 .controller("ReservationFormCtrl", [
 "$scope",
+"$rootScope",
 "$state",
 "crudType",
 "reservation",
 "outing",
 "reservationsSvc",
-function($scope, $state, crudType, reservation, outing, reservationsSvc){
+function($scope, $rootScope, $state, crudType, reservation, outing, reservationsSvc){
 
   $scope.reservation = reservation;
   $scope.outing = outing;
@@ -24,6 +25,12 @@ function($scope, $state, crudType, reservation, outing, reservationsSvc){
           $state.go("day", {date: $scope.outing.day.date});
         });
     }
+  }
+
+  $scope.startMovingRsv = function(){
+    $rootScope.rsvMove.moving = true;
+    $rootScope.rsvMove.rsv = $scope.reservation;
+    $state.go("day", {date: $scope.outing.day.date});
   }
 
 }]);

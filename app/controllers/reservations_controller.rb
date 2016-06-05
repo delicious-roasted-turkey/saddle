@@ -10,6 +10,13 @@ class ReservationsController < ApplicationController
     render json: nil
   end
 
+  def move_to_outing
+    rsv_id = params.require(:rsv_id)
+    outing_id = params.require(:outing_id)
+    Reservation.find(rsv_id).update!(:outing_id => outing_id)
+    render json:nil
+  end
+
   def show
     @reservation = Reservation.find params[:id]
   end

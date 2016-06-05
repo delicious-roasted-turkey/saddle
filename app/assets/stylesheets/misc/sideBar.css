@@ -50,11 +50,16 @@ footer {
 
 
 /* Sidebar navigation */
-.nav-sidebar > li > a {
-    padding-right: 20px;
-    padding-left: 20px;
+.nav-sidebar > li > a,
+.nav-sidebar > li > button {
+    padding: 10px 20px;
 }
-.nav-sidebar > .active > a {
+.nav-sidebar > li > button {
+    width: 100%;
+    text-align: left;
+}
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > button {
     color: #fff;
     background-color: #428bca !important;
 }

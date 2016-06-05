@@ -8,7 +8,7 @@ describe("Root Controller", function(){
 
   it("should provide info about links to be painted in the menu", function(){
     var $scope = {};
-    $controller("RootCtrl", { $scope: $scope });
+    $controller("HomeCtrl", { $scope: $scope });
     expect($scope.navbarLinks).toBeDefined();
   })
 

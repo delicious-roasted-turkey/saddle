@@ -10,6 +10,10 @@ function($resource, reservationsBackupSvc){
       method: 'GET',
       url: '/reservations/by_outings.json',
       isArray : true
+    },
+    moveToOuting : {
+      method: 'PUT',
+      url: '/reservations/move_to_outing.json'
     }
   });
 
@@ -40,6 +44,14 @@ function($resource, reservationsBackupSvc){
     },
     getOfOutings: function(outingIds){
       return resource.getOfOutings({"outing_ids" : JSON.stringify(outingIds)}).$promise;
+    },
+    moveToOuting: function(rsvId, outingId){
+      console.log("called movetoouting!!");
+      return resource.moveToOuting({
+        "rsv_id" : rsvId,
+        "outing_id" : outingId
+      }).$promise
+        .then(reservationsBackupSvc.writeBackupFile);
     },
     destroy: function(id){
       return resource.delete({id: id}).$promise

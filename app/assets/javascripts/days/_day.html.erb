@@ -1,10 +1,13 @@
 <div class="row">
-  <button class="btn btn-link" ui-sref="calendar({date:'{{localDate.asStr}}'})">
-    <span class="fa fa-calendar"></span> Calendari
-  </button>
-  <a class="btn btn-link" href="backup_file/{{today.asStr}}/get_text" target="_self">
-    <span class="fa fa-download"></span> Descarregar
-  </a>
+  <div class="col-xs-12">
+    <button class="btn btn-link btn-really-link" ui-sref="calendar({date:'{{localDate.asStr}}'})">
+      <span class="fa fa-calendar"></span> Calendari
+    </button>
+    <a ng-hide="rsvMove.moving" class="btn btn-link btn-really-link left-10" href="backup_file/{{today.asStr}}/get_text" target="_self">
+      <span class="fa fa-download"></span> Descarregar
+    </a>
+
+  </div>
 </div>
 <div class="row h3">
 
@@ -86,11 +89,20 @@
             <div class="pull-right outing-btns">
               <div ng-show="outing.confirmed">
                 <button class="btn-link btn-really-link" ui-sref="outings-edit({id:{{outing.id}}})"><span class="fa fa-fw fa-pencil"/></button>
-                <button class="btn-link btn-really-link" ui-sref="outings-delete({id:{{outing.id}}})" ng-disabled="outing.reservations.length">
+                <button class="btn-link btn-really-link" ui-sref="outings-delete({id:{{outing.id}}})"
+                        ng-disabled="outing.reservations.length"
+                        ng-hide="rsvMove.moving">
                   <span class="fa fa-fw fa-trash"/>
                 </button>
-                <button class="btn btn-xs btn-primary" role="button" ui-sref="reservations-new({outingId: {{outing.id}}})">
+                <button class="btn btn-xs btn-primary" role="button"
+                        ui-sref="reservations-new({outingId: {{outing.id}}})"
+                        ng-hide="rsvMove.moving">
                   <span class="fa fa-plus"></span> Reserva
+                </button>
+                <button class="btn btn-xs btn-primary" role="button"
+                        ng-click="rsvMove.moveToOuting(outing.id)"
+                        ng-show="rsvMove.moving">
+                  <span class="fa saddlefont-arrow-down-right"></span> Moure reserva aquí
                 </button>
               </div>
               <div ng-show="!outing.confirmed">
@@ -140,7 +152,8 @@
 
           </div>
           <%-# Right part: buttons to edit and delete -%>
-          <div class="adjust-to-content text-nowrap">
+          <div class="adjust-to-content text-nowrap"
+               ng-class="{'invisible' : rsvMove.moving}">
             <a role="button" ui-sref="reservations-edit({id: {{reservation.id}}})">
               <span class="fa fa-fw fa-pencil"></span>
             </a>

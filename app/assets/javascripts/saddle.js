@@ -299,6 +299,35 @@ angular.module('saddle')
   }, 1000);
 
 
-  //$timeout(reservationsBackupSvc.writeBackupFile, 2000);
-
 }]);
+
+// Testing only
+angular.module('saddle')
+.run([
+  '$rootScope',
+  '$state',
+  'reservationsSvc',
+  'outingsSvc',
+  function ($rootScope, $state, reservationsSvc, outingsSvc) {
+  $rootScope.rsvMove = {
+    moving : false,
+    cancel : function(){
+      $rootScope.rsvMove.moving = false
+    },
+    moveToOuting : function(outingId) {
+      if(!$rootScope.rsvMove.moving){
+        return;
+      }
+      var rsvId = $rootScope.rsvMove.rsv.id;
+      reservationsSvc.moveToOuting(rsvId, outingId)
+        .then(function(){
+          // Navigate to the day of the outing
+          outingsSvc.get(outingId).then(function(outing){
+            $rootScope.rsvMove.moving = false;
+            $state.go("day", {date: outing.day.date}, {reload: true});
+          });
+        });
+    }
+  }
+}]);
+

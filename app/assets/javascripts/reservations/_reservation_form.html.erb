@@ -4,13 +4,26 @@
 <form class="form-horizontal" ng-class="{'atmp-submit': atmpSubmit}" name="resv_form">
 
   <div class="form-group">
+    <div class="col-sm-12">
+
+      <div id="rsv-view-outing">
+        <p class="form-control-static">
+          {{outing.day.date | saddleLongDate}}
+        </p>
+        <p class="form-control-static">
+          {{outing.time}} {{outing.name}}
+        </p>
+
+        <button type="button" class="btn btn-link btn-really-link" ng-click="startMovingRsv()">
+          <span class="fa fa-fw fa-lg saddlefont-reschedule"></span> Moure reserva
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="form-group">
     <div class="col-sm-10 col-sm-offset-2">
-      <p class="form-control-static">
-        {{outing.day.date | saddleLongDate}}
-      </p>
-      <p class="form-control-static">
-        {{outing.time}} {{outing.name}}
-      </p>
       <p class="form-control-static">
         {{reservation.numAdults + reservation.numChildren}} persones
       </p>
