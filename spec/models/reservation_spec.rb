@@ -5,7 +5,7 @@ RSpec.describe Reservation, type: :model do
 
   describe 'changes update outing' do
 
-    before_each do
+    before(:each) do
       Reservation.delete_all
       Outing.delete_all
       Day.delete_all

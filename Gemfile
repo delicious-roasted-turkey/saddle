@@ -4,7 +4,7 @@ ruby '2.2.4'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.1'
+gem 'rails', '4.2.6'
 
 gem 'responders', '~>2.0'
 
@@ -15,7 +15,7 @@ gem 'paranoia', '~>2.0'
 # gem 'sqlite3'
 
 # Use postgres as the database for Active Record
-gem 'pg'
+gem 'pg', '~> 0.20'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -51,21 +51,26 @@ gem 'figaro'
 # gem 'capistrano-rails', group: :development
 
 gem 'yajl-ruby'
+gem 'multi_json', '~> 1.11'
 
 group :development, :test do
 
   gem 'byebug'
 
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
-
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 
-  gem 'rspec-rails', '~> 3.0'
+  gem 'rspec-rails', '~> 3.5'
   gem 'rspec-activemodel-mocks'
 
   gem 'factory_girl_rails'
+end
+
+group :development do
+
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console', '~> 2.0'
+
 end
 
 group :test do
