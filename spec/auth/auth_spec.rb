@@ -19,7 +19,7 @@ describe 'restricted areas', :type => :request do
   describe 'with user logged in' do
 
     before :each do
-      user = FactoryGirl.create :user
+      user = FactoryBot.create :user
       post '/users/sign_in', {
         :user => {
           :email => user.email,

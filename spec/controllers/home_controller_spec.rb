@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe HomeController, type: :controller do
 
   before :each do 
-      user = FactoryGirl.create :user
+      user = FactoryBot.create :user
       sign_in user
   end
 

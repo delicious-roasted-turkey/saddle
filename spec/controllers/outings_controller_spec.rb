@@ -4,7 +4,7 @@ require 'support/render_views'
 RSpec.describe OutingsController, type: :controller do
 
   before :each do
-    user = FactoryGirl.create :user
+    user = FactoryBot.create :user
     sign_in user
     Outing.create_confirmed({:time => '09:00'}, '2012-12-12')
     @outing = Outing.order(:created_at).last

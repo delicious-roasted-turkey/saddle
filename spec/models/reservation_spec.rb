@@ -19,7 +19,7 @@ RSpec.describe Reservation, type: :model do
     #outing.day = day
 
     it 'the outing gets marked as updated when a reservation is created' do
-      day = FactoryGirl.create(:day)
+      day = FactoryBot.create(:day)
     #  rsv = Reservation.new
     #  rsv.outing = outing
     #  rsv.save!

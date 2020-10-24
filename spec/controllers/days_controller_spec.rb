@@ -6,7 +6,7 @@ RSpec.describe DaysController, type: :controller do
   describe 'show' do
 
     before :each do
-      user = FactoryGirl.create :user
+      user = FactoryBot.create :user
       sign_in user
     end
 
