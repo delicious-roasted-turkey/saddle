@@ -28,7 +28,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Specify version of sprockets in order to avoid incompatibilities
 # with angular-rails-templates
-gem 'sprockets', '2.12.3'
+gem 'sprockets', '2.12.5'
 
 gem 'angular-rails-templates'
 
